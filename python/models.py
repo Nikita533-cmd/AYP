@@ -1,0 +1,43 @@
+from django.db import models
+
+
+class otv(models.Model):
+    distance = models.FloatField()
+    speed = models.IntegerField()
+    n_vetk = models.IntegerField()
+    n_otv = models.IntegerField()
+    d1 = models.FloatField()
+    d2 = models.FloatField()
+    d3 = models.FloatField()
+    d4 = models.FloatField()
+    d5 = models.FloatField()
+    d6 = models.FloatField()
+    d7 = models.FloatField()
+    d8 = models.FloatField()
+    d9 = models.FloatField()
+    d10 = models.FloatField()
+    d11 = models.FloatField()
+    d12 = models.FloatField()
+    d12 = models.FloatField()
+    d13 = models.FloatField()
+    d14 = models.FloatField()
+    d15 = models.FloatField()
+    d16 = models.FloatField()
+    d17 = models.FloatField()
+    d18 = models.FloatField()
+    d19 = models.FloatField()
+    d20 = models.FloatField()
+    d21 = models.FloatField()
+    Max_L_C = models.IntegerField()
+    Max_L_B = models.IntegerField()
+    Max_L_A = models.IntegerField()
+    Max_L2_C = models.IntegerField()
+    Max_L2_B = models.IntegerField()
+    Max_L2_A = models.IntegerField()
+    vers = models.IntegerField()
+    q_C = models.IntegerField()
+    q_B = models.IntegerField()
+    q_A = models.IntegerField()
+    def __str__(self):
+        
+       return f"'{self.speed}'"

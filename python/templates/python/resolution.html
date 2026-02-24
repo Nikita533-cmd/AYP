@@ -1,0 +1,395 @@
+<h2>Результат подбора диаметров</h2>
+<form id="form2">
+
+  <div class="form-label"> 
+    <label >  Версия извещателя - <span id="r_vers">{{ vers }} </span> </label>
+    </div>
+    <div class="form-label"> 
+    <label >  Количество веток - <span id="r_vetk"> {{q_vetk}} </span></label>
+    </div>
+    <div class="form-label"> 
+    <label >  Количество отверстий на одной ветке - <span id="r_vetk"> {{q_otv}} </span></label>
+    </div>
+    <div class="form-label"> 
+      <label >  Расстояния между отверстиями - <span id="r_h"> {{s_otv}}</span> м </label>
+    </div>
+    <div class="form-label"> 
+    <label >  Высота установки труб - <span id="r_h"> {{ h }} </span> м </label>
+    </div>
+    <div class="form-label"> 
+    {% if q_vetk == 1 %}
+    <label >  <span id="r_s1">Расстояние от извещателя до первого отверстия - {{s1}}</span> м </label>
+    {% else %}
+    <label >  <span id="r_s1">Расстояние от извещателя до разветвления - {{s1}}</span> м </label>
+    {% endif %}
+    </div>
+    <div class="form-label"> 
+    <label >  <span id="r_s2">Расстояние от извещателя до последнего отверстия - {{s2}}</span> м </label>
+    </div>
+    <div class="form-label"> 
+      <label >  <span id="plosh">Максимальная защищаемая площадь - {{ploshad}}</span> м<sup>2</sup> </label>
+    </div>
+
+{% if  C_enable == 1 %}
+
+<table class="r_table">
+  {% for message in message_list_C %}
+  <h3 class="form-label">Диаметры отверстий для класса C.<br>Скорость извещателя - не менее {{message.speed}}.</h3>
+
+  <tr>
+   
+    {% for i in q_otv_mas %} 
+    <td>{{ i }}</td>
+    {% endfor %} 
+    
+  </tr>
+  
+  <tr>
+                   
+     <td>&#216;,мм</td>
+     <td>{{ message.d1 }}</td>
+     {% if  q_otv_mas|length > 2 %}
+     <td>{{ message.d2 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 3 %}
+     <td>{{ message.d3 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 4 %}
+     <td>{{ message.d4 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 5 %}
+     <td>{{ message.d5 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 6 %}
+     <td>{{ message.d6 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 7 %}
+     <td>{{ message.d7 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 8 %}
+     <td>{{ message.d8 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 9 %}
+     <td>{{ message.d9 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 10 %}
+     <td>{{ message.d10 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 11 %}
+     <td>{{ message.d11 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 12 %}
+     <td>{{ message.d12 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 13 %}
+     <td>{{ message.d13 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 14 %}
+     <td>{{ message.d14 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 15 %}
+     <td>{{ message.d15 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 16 %}
+     <td>{{ message.d16 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 17 %}
+     <td>{{ message.d17 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 18 %}
+     <td>{{ message.d18 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 19 %}
+     <td>{{ message.d19 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 20 %}
+     <td>{{ message.d20 }}</td>
+     {% endif %}
+     {% if  q_otv_mas|length > 21 %}
+     <td>{{ message.d21 }}</td>
+     {% endif %}
+              
+  </tr>
+  {% endfor %}
+    
+</table>
+
+{% else %}
+<div class="form-label"> 
+  <label >   </label>
+</div>
+{% endif %}
+
+{% if  C_enable == 2 %}
+
+  <h3 class="form-label"> Для класса С решений не обнаружено - уменьшите количество отверстий. </h3>
+
+{% endif %}
+{% if  C_enable == 3 %}
+
+  <h3 class="form-label" > Для класса С решений не обнаружено - уменьшите расстояние до первого отверстия. </h3>
+
+{% endif %}
+{% if  C_enable == 4 %}
+
+  <h3 class="form-label"> Для класса С решений не обнаружено - уменьшите расстояние до разветвления. </h3>
+
+{% endif %}
+{% if  C_enable == 5 %}
+
+  <h3 class="form-label"> Для класса С решений не обнаружено - уменьшите расстояние до последнего отверстия. </h3>
+
+{% endif %}
+{% if  C_enable == 6 %}
+
+  <h3 class="form-label" > Для класса С решений не обнаружено - уменьшите высоту установки труб. </h3>
+
+{% endif %}
+
+{% if  B_enable == 1 %}
+
+<table class="r_table">
+  {% for message in message_list_B %}
+  <h3 class="form-label">Диаметры отверстий для класса B.<br>Скорость извещателя - не менее {{message.speed}}. </h3>
+
+  <tr>
+   
+    {% for i in q_otv_mas %} 
+    <td>{{ i }}</td>
+    {% endfor %} 
+    
+  </tr>
+ 
+  
+  <tr>
+                    
+       <td>&#216;,мм</td>  
+       <td>{{ message.d1 }}</td>
+       {% if  q_otv_mas|length > 2 %}
+       <td>{{ message.d2 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 3 %}
+       <td>{{ message.d3 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 4 %}
+       <td>{{ message.d4 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 5 %}
+       <td>{{ message.d5 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 6 %}
+       <td>{{ message.d6 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 7 %}
+       <td>{{ message.d7 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 8 %}
+       <td>{{ message.d8 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 9 %}
+       <td>{{ message.d9 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 10 %}
+       <td>{{ message.d10 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 11 %}
+       <td>{{ message.d11 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 12 %}
+       <td>{{ message.d12 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 13 %}
+       <td>{{ message.d13 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 14 %}
+       <td>{{ message.d14 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 15 %}
+       <td>{{ message.d15 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 16 %}
+       <td>{{ message.d16 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 17 %}
+       <td>{{ message.d17 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 18 %}
+       <td>{{ message.d18 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 19 %}
+       <td>{{ message.d19 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 20 %}
+       <td>{{ message.d20 }}</td>
+       {% endif %}
+       {% if  q_otv_mas|length > 21 %}
+       <td>{{ message.d21 }}</td>
+       {% endif %}
+              
+  </tr>
+  {% endfor %}
+    
+</table>
+
+{% else %}
+<div class="form-label"> 
+  <label >   </label>
+</div>
+{% endif %}
+
+{% if  B_enable == 2 %}
+
+  <h3 class="form-label" > Для класса B решений не обнаружено - уменьшите количество отверстий. </h3>
+
+{% endif %}
+{% if  B_enable == 3 %}
+
+  <h3 class="form-label"> Для класса B решений не обнаружено - уменьшите расстояние до первого отверстия. </h3>
+
+{% endif %}
+{% if  B_enable == 4 %}
+
+  <h3 class="form-label" > Для класса B решений не обнаружено - уменьшите расстояние до разветвления. </h3>
+
+{% endif %}
+{% if  B_enable == 5 %}
+
+  <h3 class="form-label" > Для класса B решений не обнаружено - уменьшите расстояние до последнего отверстия. </h3>
+
+{% endif %}
+{% if  B_enable == 6 %}
+
+  <h3 class="form-label"> Для класса B решений не обнаружено - уменьшите высоту установки труб. </h3>
+
+{% endif %}
+
+{% if  A_enable == 1 %}
+
+<table class="r_table">
+  {% for message in message_list_A %}
+  <h3 class="form-label">Диаметры отверстий для класса A.<br>Скорость извещателя - не менее {{message.speed}}. </h3>
+
+  <tr>
+   
+    {% for i in q_otv_mas %} 
+    <td>{{ i }}</td>
+    {% endfor %} 
+    
+  </tr>
+    
+  
+  <tr>
+ 
+                 
+      <td>&#216;,мм</td> 
+      <td>{{ message.d1 }}</td>
+      {% if  q_otv_mas|length > 2 %}
+      <td>{{ message.d2 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 3 %}
+      <td>{{ message.d3 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 4 %}
+      <td>{{ message.d4 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 5 %}
+      <td>{{ message.d5 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 6 %}
+      <td>{{ message.d6 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 7 %}
+      <td>{{ message.d7 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 8 %}
+      <td>{{ message.d8 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 9 %}
+      <td>{{ message.d9 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 10 %}
+      <td>{{ message.d10 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 11 %}
+      <td>{{ message.d11 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 12 %}
+      <td>{{ message.d12 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 13 %}
+      <td>{{ message.d13 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 14 %}
+      <td>{{ message.d14 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 15 %}
+      <td>{{ message.d15 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 16 %}
+      <td>{{ message.d16 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 17 %}
+      <td>{{ message.d17 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 18 %}
+      <td>{{ message.d18 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 19 %}
+      <td>{{ message.d19 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 20 %}
+      <td>{{ message.d20 }}</td>
+      {% endif %}
+      {% if  q_otv_mas|length > 21 %}
+      <td>{{ message.d21 }}</td>
+      {% endif %}
+              
+  </tr>
+  {% endfor %}
+  
+  
+</table>
+
+
+{% else %}
+<div class="form-label"> 
+  <label >   </label>
+</div>
+{% endif %}
+
+{% if  A_enable == 2 %}
+
+  <h3 class="form-label" > Для класса A решений не обнаружено - уменьшите количество отверстий. </h3>
+
+{% endif %}
+{% if  A_enable == 3 %}
+
+  <h3 class="form-label"> Для класса A решений не обнаружено - уменьшите расстояние до первого отверстия. </h3>
+
+{% endif %}
+{% if  A_enable == 4 %}
+
+  <h3 class="form-label"> Для класса A решений не обнаружено - уменьшите расстояние до разветвления. </h3>
+
+{% endif %}
+{% if  A_enable == 5 %}
+
+  <h3 class="form-label"> Для класса A решений не обнаружено - уменьшите расстояние до последнего отверстия. </h3>
+
+{% endif %}
+{% if  A_enable == 6 %}
+
+  <h3 class="form-label"> Для класса A решений не обнаружено - уменьшите высоту установки труб. </h3>
+
+{% endif %}
+
+<div class="form-labelmini"> 
+  <label id="datetime">{{ dt }}</label>
+  </div>
+  <div class="form-labelmini"> 
+    <label id="vb">{{ vb }}</label>
+  </div>
+
+
+
+</form>
