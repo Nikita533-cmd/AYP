@@ -24,6 +24,11 @@ ln -s etc/docker-compose.yaml ./
 ./run.sh migrate
 ```
 
+### 4.1 Заполнение БД
+```bash
+docker exec -i spec-auto_copy-postgres-1 psql -U postgres -d postgres < 2025-12-18-04-28.sql
+```
+
 ### 5.Запуск дев сервера
 ```bash
 ./run.sh runserver
