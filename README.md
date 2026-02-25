@@ -24,6 +24,11 @@ ln -s etc/docker-compose.yaml ./
 ./run.sh migrate
 ```
 
+### 4.1 Заполнение БД
+```bash
+docker exec -i ayp-postgres-1 psql -U postgres -d postgres < backup_ALL_20_TABLES_20260225_1009.sql
+```
+
 ### 5.Запуск дев сервера
 ```bash
 ./run.sh runserver
