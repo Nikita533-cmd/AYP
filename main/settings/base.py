@@ -65,7 +65,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "ryPeqdZznz74",
+        # "PASSWORD": "ryPeqdZznz74",
+        "PASSWORD": "postgres",
         "HOST": "postgres",
         "PORT": "5432",
     }
@@ -148,12 +149,17 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/webapp/static'  # ← путь внутри контейнера
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',         # ← поиск в ./static
-]
+# STATIC_URL = '/static/'
+# STATIC_ROOT = '/webapp/static'  # ← путь внутри контейнера
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',         # ← поиск в ./static
+# ]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR.parent.parent / "static"
+STATICFILES_DIRS = [
+    BASE_DIR.parent / "static",
+]

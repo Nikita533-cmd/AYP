@@ -17,6 +17,7 @@ urlpatterns = [
     path('editor/', views.editor_view, name='editor'),
     path("api/", api.urls),
     path("users/", include("users.urls", namespace="users")),
+    path('baseaup/', views.baseaup, name='baseaup'),
 
 ]
 
