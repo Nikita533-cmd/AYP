@@ -26,7 +26,7 @@ ln -s etc/docker-compose.yaml ./
 
 ### 4.1 Заполнение БД
 ```bash
-docker exec -i ayp-postgres-1 psql -U postgres -d postgres < backup_utf8_20260225_1058.sql
+docker exec -i ayp-postgres-1 psql -U postgres -d postgres < backup_utf8_20260225_1217.sql
 ```
 
 ### 5.Запуск дев сервера

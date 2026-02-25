@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function getCaclulationResults(data) {
     try {
-      const response = await fetch("/irrigation/intensity/", {
+      const response = await fetch("/api/irrigation/intensity/", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {"Content-Type": "application/json"},
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
     drop_graph()
 
     try {
-      const response = await fetch(`/irrigation/graph-data/${sprinkler_id}/`)
+      const response = await fetch(`/api/irrigation/graph-data/${sprinkler_id}/`)
       if (!response.ok) throw new Error(`Response status: ${response.status}`)
       const 
         json = await response.json(),
