@@ -18,7 +18,6 @@ class otv(models.Model):
     d10 = models.FloatField()
     d11 = models.FloatField()
     d12 = models.FloatField()
-    d12 = models.FloatField()
     d13 = models.FloatField()
     d14 = models.FloatField()
     d15 = models.FloatField()

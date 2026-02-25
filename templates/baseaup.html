@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Онлайн конфигуратор расчета автоматических установок пожаротушения (АУП){% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="https://sa-biysk.ru/" class="grey-dark">
+          <img src="{% static 'images/icons/home.png' %}" style="margin-bottom: 2px;">
+          Главная
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+    </ol>
+  </nav>
+</div>
+<div class="container container-general" style="display: flex; flex-direction: column; width: 100%; border-radius: 30px; background-color: #F3F2F8; padding-left: 40px; padding-right: 40px;">
+    <!-- подбор МПНУ! -->
+    <article style="margin-bottom: 40px; margin-top: 40px;">
+        <a class="article1" href="https://station.sa-biysk.ru/" target="_blank">
+            <div class="container module">            
+                <img class="image1" width="auto" height="300px" src="/static/images/mpnu.jpg" alt="МПНУ">
+                <h5>
+                    Кофнигуратор служит для подбора модульной пожарной насосной установки в зависимости от заданных параметров.
+                </h5>                                   
+            </div>
+        </a>
+                
+    </article>
+<!-- расчет воздушных установок -->
+     <article style="margin-bottom: 40px;">
+        <a class="article1" href="https://sa-biysk.ru/calc/" target="_blank">
+            <div class="container module">            
+                <img class="image1" width="auto" height="300px" src="/static/images/air.jpg" alt="air">
+                <h5>
+                    Расчет и определение оптимального состава спринклерных воздушных установок пожаротушения.
+                </h5>                                  
+            </div>
+        </a>
+                
+    </article>
+<!-- калькулятор подбора оросителей -->
+     <article style="margin-bottom: 40px; ">
+        <a class="article1" href="https://set.sa-biysk.ru/?_gl=1*17r7hhe*_ga*MTUzMzk3NDc3My4xNzEzNzYxOTQy*_ga_EGJBCMTDM0*czE3NzE5ODU3NjQkbzU4NSRnMSR0MTc3MTk4NjEwOCRqNDAkbDAkaDA.*_ga_3LRQHW238X*czE3NzE5ODU3NjQkbzUxNyRnMSR0MTc3MTk4NjEwOCRqNDAkbDAkaDA." target="_blank">
+            <div class="container module">            
+                <img class="image1" width="auto" height="300px" src="/static/images/orositel.jpg" alt="orositel">
+                <h5>
+                    Калькулятор служит для расчета средней интенсивности орошения.
+                </h5>                                   
+            </div>
+        </a>
+                
+    </article>
+<!-- калькулятор подбора диаметров отверстий аспирационной системы ИПА -->
+     <article style="margin-bottom: 40px; ">
+        <a class="article1" href="ipa/" target="_blank">
+            <div class="container module">
+                <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa">
+                <h5>
+                    Калькулятор служит подбора диаметров отверстий аспирационной системы.
+                </h5>                                   
+            </div>
+        </a>
+                
+    </article>
+<!-- калькулятор АУП -->
+     <article style="margin-bottom: 40px; ">
+        <a class="article1" href="ayp/" target="_blank">
+            <div class="container module">            
+                <img class="image1" width="auto" height="300px" src="/static/images/aup.jpg" alt="МПНУ">
+                <h5>
+                    Кофнигуратор служит для расчета АУП.
+                </h5>                       
+            </div>
+        </a>                
+    </article>    
+
+</div>
+    
+<style>
+    .container.module {
+            
+        background-color: white; 
+        border-radius: 30px; 
+        width: 100%; 
+        height: 350px; 
+        padding-left: 30px;
+        display: flex;
+        align-items: center;
+}
+
+a {
+    text-decoration: none;  
+    font-size: 20px;  
+    color: #0F1379;
+    
+}
+
+</style>
+
+{% endblock %}

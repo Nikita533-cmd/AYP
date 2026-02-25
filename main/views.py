@@ -17,3 +17,6 @@ def new_view(request):
 
 def editor_view(request):
     return render(request, 'editor.html', {"view": "editor"})
+
+def baseaup (request):
+    return render (request, 'baseaup.html')

@@ -1,12 +1,12 @@
 # Запуск проекта локально в Docker
 В системе должнен быть установлены Docker актуальной версии!
 
-Новая
-### 1. Клонируем себе репозиторий
+
+<!-- ### 1. Клонируем себе репозиторий
 ```bash
 git clone git@github.com:SamoilenkoLev/spec-auto.git
 cd spec-auto
-```
+``` -->
 
 ### 2. Линтим docker-compose.yml с docker-compose.dev.yml
 
@@ -24,9 +24,9 @@ ln -s etc/docker-compose.yaml ./
 ./run.sh migrate
 ```
 
-### 4. Заполнение БД
+### 4.1 Заполнение БД
 ```bash
-docker exec -i spec-auto_copy-postgres-1 psql -U postgres -d postgres < 2025-12-18-04-28.sql
+docker exec -i ayp-postgres-1 psql -U postgres -d postgres < backup_utf8_20260225_1058.sql
 ```
 
 ### 5.Запуск дев сервера
