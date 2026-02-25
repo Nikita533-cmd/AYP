@@ -1,0 +1,33 @@
+ .gitignore                                         |  145 [32m+[m
+ api/Generat_equation.py                            |  308 [32m++[m
+ api/urls.py                                        |   11 [32m+[m
+ api/views.py                                       |   20 [32m+[m
+ docker-compose.yaml                                |   35 [32m+[m
+ ...4 \320\272\320\276\320\277\320\270\321\217.csv" | 3126 [32m++++++++++++++++++++[m
+ exported_python_otv_db.csv                         | 3126 [32m++++++++++++++++++++[m
+ python/__init__.py                                 |    0
+ python/admin.py                                    |    7 [32m+[m
+ python/apps.py                                     |    6 [32m+[m
+ python/forms.py                                    |   10 [32m+[m
+ python/migrations/0001_initial.py                  |   22 [32m+[m
+ python/migrations/0002_otv.py                      |   50 [32m+[m
+ ..._logmessage_otv_q_a_otv_q_b_otv_q_c_otv_vers.py |   40 [32m+[m
+ python/migrations/__init__.py                      |    0
+ python/models.py                                   |   43 [32m+[m
+ python/static/favicon.ico                          |  Bin [31m0[m -> [32m15086[m bytes
+ python/static/favicon.svg                          |   18 [32m+[m
+ python/static/fonts/roboto/Roboto-Regular.woff2    |  Bin [31m0[m -> [32m49784[m bytes
+ python/static/python/fonts.css                     |  180 [32m++[m
+ python/static/python/img/home.png                  |  Bin [31m0[m -> [32m374[m bytes
+ python/static/python/img/lbtopdf.png               |  Bin [31m0[m -> [32m23913[m bytes
+ python/static/python/img/logo.svg                  |   12 [32m+[m
+ python/static/python/img/logo_small.svg            |   12 [32m+[m
+ python/static/python/img/vop_ico13.png             |  Bin [31m0[m -> [32m34311[m bytes
+ python/static/python/site.css                      |  323 [32m++[m
+ python/templates/python/layout.html                |  478 [32m+++[m
+ python/templates/python/pdf_template.html          |  467 [32m+++[m
+ python/templates/python/resolution.html            |  395 [32m+++[m
+ python/urls.py                                     |   22 [32m+[m
+ python/views.py                                    |  298 [32m++[m
+ req.txt                                            |   31 [32m+[m
+ 32 files changed, 9185 insertions(+)
