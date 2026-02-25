@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Онлайн конфигуратор расчета автоматических установок пожаротушения (АУП){% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="https://sa-biysk.ru/" class="grey-dark">
+          <img src="{% static 'images/icons/home.png' %}" style="margin-bottom: 2px;">
+          Главная
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+    </ol>
+  </nav>
+</div>
+<div class="container container-general" style="display: flex; flex-direction: column; width: 100%;">
+    
+    <article style="margin-bottom: 40px; margin-top: 40px;">
+        <a class="article1" href="https://station.sa-biysk.ru/" target="_blank">
+            <img class="image1" width="340px" height="auto" src="/static/images/mpnu.jpg" alt="МПНУ">
+             Подбор модульной насосной установки                          
+                   
+        </a>
+    </article>
+    <article style="margin-bottom: 20px;">
+        <a class="article1" href="https://station.sa-biysk.ru/" target="_blank">
+            <img class="image1" width="340px" height="auto" src="/static/images/mpnu.jpg" alt="МПНУ">
+             Подбор модульной насосной установки                          
+                   
+        </a>
+    </article>
+    <article style="margin-bottom: 20px;">
+        <a class="article1" href="https://station.sa-biysk.ru/" target="_blank">
+            <img class="image1" width="340px" height="auto" src="/static/images/mpnu.jpg" alt="МПНУ">
+             Подбор модульной насосной установки                          
+                   
+        </a>
+    </article>
+
+</div>
+    
+<style>
+  
+</style>
+
+{% endblock %}

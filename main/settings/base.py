@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "irrigation",
     "tubes",
     "management_node",
+    "python",
 ]
 
 MIDDLEWARE = [
