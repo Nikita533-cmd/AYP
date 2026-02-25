@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "irrigation",
     "tubes",
     "management_node",
+    "python",
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "ryPeqdZznz74",
+        "PASSWORD": "postgres",
+#       "PASSWORD": "ryPeqdZznz74",
         "HOST": "postgres",
         "PORT": "5432",
     }
@@ -148,11 +150,18 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/webapp/static'  # ← путь внутри контейнера
+# STATIC_URL = '/static/'
+# STATIC_ROOT = '/webapp/static'  # ← путь внутри контейнера
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',         # ← поиск в ./static
+# ]
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR.parent.parent / "static"
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',         # ← поиск в ./static
+    BASE_DIR.parent / "static",
 ]
+
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
