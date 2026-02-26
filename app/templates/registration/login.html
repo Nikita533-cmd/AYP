@@ -1,0 +1,9 @@
+<form method="post">
+
+    {% csrf_token %}
+    На данный момент вход на сайт разрешен только разработчикам
+    {{ form.as_p }}
+
+    <button type="submit">Войти</button>
+
+</form>

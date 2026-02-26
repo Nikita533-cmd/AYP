@@ -20,3 +20,6 @@ def editor_view(request):
 
 def baseaup (request):
     return render (request, 'baseaup.html')
+
+def detector(request):
+    return render(request, "detector.html", {})

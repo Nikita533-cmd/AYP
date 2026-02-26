@@ -1,6 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html>
-<head>
+   
+    <link rel="stylesheet"  href="{% static 'css/site.css' %}"/>
+    
+    <!-- <link rel="stylesheet" href="{% static 'css/fonts.css' %}"/> -->
+<!-- <head>
     <meta charset="utf-8"/>
     
     {% load static %}
@@ -9,17 +16,17 @@
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
     <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" />
 
-</head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>-->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
 <body>
 
 
     <title>Подбор диаметров отверстий аспирационной системы</title>
 
-    <header id="Head">
+    <!-- <header id="Head">
         <div class="d-flex flex-wrap align-items-center justify-content-start" style="height: 100%;">
             <a href="https://sa-biysk.ru/" class="logo_up align-items-center me-lg-auto" style="justify-content: flex-start;">
-            <!--<a href="https://sa-biysk.ru/" class="logo_up align-items-center me-lg-auto" style="height: 90%; justify-content: flex-start;">-->
+            
     
                 <img src="/static/python/img/logo.svg" role="img" aria-label="Спецавтоматика" class="logo" style=" justify-content: flex-start;" />
             </a>
@@ -28,12 +35,12 @@
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
     
                     <li>
-                        <a href="tel:8-800-2008-208" class="nav-link text-white">8-800-2008-208</a> <!--8-800-2008-208-->
+                        <a href="tel:8-800-2008-208" class="nav-link text-white">8-800-2008-208</a> 
                     </li>
                 </ul>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <div class="container my-4">
 
@@ -41,7 +48,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="https://sa-biysk.ru/" class="grey-dark">
-                        <img src='/static/python/img/home.png' style="margin-bottom: -1px;" />
+                        <img src="{% static 'images/icons/home.png' %}" style="margin-bottom: 2px;">
                         Главная
                     </a>
                 </li>
@@ -90,7 +97,7 @@
                     <tr id="row2">
                         <td style="text-align: left; padding-left: 0px;">
                             <label for="vetk" class="form-label">
-                            Количество веток <img src="/static/python/img/vop_ico13.png" title="Выберите количество веток" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            Количество веток <img src="{% static 'images/vop_ico13.png' %}" title="Выберите количество веток" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
                             </label>
                         </td>
                         <td style="text-align: right;"><select name="vetk" id="vetk"  class="wiget" onchange="change_v()">
@@ -150,7 +157,7 @@
                     <tr id="row5">
                         <td style="text-align: left; padding-left: 0px;">
                             <label for="H" class="form-label">
-                            Высота установки трубопровода, м <img src="/static/python/img/vop_ico13.png" title="Введите высоту в метрах" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            Высота установки трубопровода, м <img src="{% static 'images/vop_ico13.png' %}" title="Введите высоту в метрах" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
                             </label>
                         </td>
                         <td style="text-align: right;"><input type="number" name="H" id="H" class="wiget" min="0" max="30" step="any" value="10" required></td>
@@ -207,7 +214,7 @@
 
 
 
-<footer id="Footer">
+<!-- <footer id="Footer">
     <div class="d-flex1 flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="https://sa-biysk.ru/" class="logo_up d-flex1 align-items-center me-lg-auto" style="height: 96px; ">
             <img src='/static/python/img/logo_small.svg' height="50" role="img" aria-label="Спецавтоматика" class="logo" />
@@ -223,7 +230,7 @@
             </ul>
         </div>
     </div>
-</footer>
+</footer> -->
 
 
 
@@ -476,3 +483,4 @@
     
 </script>
 </html>
+{% endblock %}

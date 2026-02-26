@@ -89,6 +89,7 @@ def generate_pdf(request):
 
 def get_csrf_token(request):
     """Endpoint для получения CSRF токена"""
+    print(get_token(request))
     return JsonResponse({"csrfToken": get_token(request)})
     
 def check_static_file_exists(relative_path):

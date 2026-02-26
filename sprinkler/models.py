@@ -78,8 +78,8 @@ class Sprinkler(models.Model):
     k3 = models.DecimalField("коэффициент k3", default=0, max_digits=5, decimal_places=4, null=True, blank=True)
     k4 = models.DecimalField("коэффициент k4", default=0, max_digits=5, decimal_places=4, null=True, blank=True)
     k5 = models.DecimalField("коэффициент k5", default=0, max_digits=5, decimal_places=4, null=True, blank=True)
-    # k6 = models.DecimalField("коэффициент k6", default=0, max_digits=5, decimal_places=4, null=True, blank=True)#добавлена элемент
-    # k7 = models.DecimalField("коэффициент k7", default=0, max_digits=5, decimal_places=4, null=True, blank=True)#добавлена элемент
+    k6 = models.DecimalField("коэффициент k6", default=0, max_digits=5, decimal_places=4, null=True, blank=True)#добавлена элемент
+    k7 = models.DecimalField("коэффициент k7", default=0, max_digits=5, decimal_places=4, null=True, blank=True)#добавлена элемент
     K = models.DecimalField("Коэффициент производительности", max_digits=6, decimal_places=3, null=True, blank=True)
 
     thermal_lock = models.CharField(
@@ -125,8 +125,8 @@ class Sprinkler(models.Model):
         """
         intensity = 0
         description = ""
-        k = [self.k0, self.k1, self.k2, self.k3, self.k4, self.k5]#, self.k6, self.k7]
-        for i in range(6): #дОБАВИЛ
+        k = [self.k0, self.k1, self.k2, self.k3, self.k4, self.k5, self.k6, self.k7]
+        for i in range(8): #дОБАВИЛ
             intensity += P**i * k[i]
             description += f" + ({P}^{i} * {k[i]}) {i=}"
         logger.debug(f"{P=}: {intensity=}, {description}")

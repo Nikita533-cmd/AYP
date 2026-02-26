@@ -1,0 +1,442 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Онлайн конфигуратор расчета автоматических установок пожаротушения (АУП){% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="https://sa-biysk.ru/" class="grey-dark">
+          <img src="{% static 'images/icons/home.png' %}" style="margin-bottom: 2px;">
+          Главная
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+    </ol>
+  </nav>
+</div>
+<body>
+
+
+    <title>Подбор диаметров отверстий аспирационной системы</title>
+
+    
+    <div class="container my-4">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="https://sa-biysk.ru/" class="grey-dark">
+                        <img src='/static/python/img/home.png' style="margin-bottom: -1px;" />
+                        Главная
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+            </ol>
+            <h1>Подбор диаметров отверстий аспирационной системы</h1>
+        </nav>
+    </div>
+
+
+    <div class="container container-gray" style="min-height: 10px;">
+        <div class="container Form-TY3" style="min-height: 10px;">
+            <h2>Параметры воздухозаборной системы</h2>
+            <form method="post" id="form1"  >
+                {% csrf_token %}
+
+                <input type="hidden" name="csrfmiddlewaretoken" value="nrAZtTQzZm0kXQJBybLf4TxRWrqitsUFC5Sh4WUDKCHTNhhL8bibWVk1LQFfxpaS">
+                <input type="hidden" name="which_form_is_it" value="form1">
+                <input type="hidden" id="key_mpny" name="key_mpny" value="None">
+
+                <table class="pred-param2">
+                    <colgroup>
+                        <col style="width: 75%;">
+                        <col style="width: 25%;">
+                       
+                    </colgroup>
+
+
+
+                    <tr id="row1">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="vers" class="form-label">
+                            Версия извещателя 
+                            </label>
+                        </td>
+                        <td style="text-align: right;">
+                            
+                            <select id="vers" name="vers" class="wiget" onchange="change_vers()">
+                                <option value="ИПАv5">ИПАv5</option>
+                                <option value="ИПА-Селект">ИПА-Селект</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    
+                    <tr id="row2">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="vetk" class="form-label">
+                            Количество веток <img src="/static/python/img/vop_ico13.png" title="Выберите количество веток" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><select name="vetk" id="vetk"  class="wiget" onchange="change_v()">
+                            <option value="1">1 ветка</option>
+                            <option value="2">2 ветки</option>
+                            <option value="4">4 ветки</option>
+
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr id="row3">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="otv" class="form-label">
+                            Количество отверстий на одной ветке 
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="otv" id="otv" class="wiget" min="1" max="21" step="any" value="2" required></td>
+                      
+                    </tr>
+
+
+                    <tr id="row4">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s_otv" class="form-label">
+                            Расстояние между отверстиями, м 
+                         </label>
+                        </td>
+                        <td style="text-align: right;">
+                            <select name="s_otv" id="s_otv" class="wiget">
+                            <option value="12">12</option>
+                            <option value="11.5">11.5</option>
+                            <option value="11">11 </option>
+                            <option value="10.5">10.5</option> 
+                            <option value="10">10</option> 
+                            <option value="9.5">9.5</option> 
+                            <option value="9">9</option>
+                            <option value="8.5">8.5</option>
+                            <option value="8">8 </option>
+                            <option value="7.5">7.5</option> 
+                            <option value="7">7</option>
+                            <option value="6.5">6.5</option>
+                            <option value="6">6 </option>
+                            <option value="5.5">5.5</option>  
+                            <option value="5">5</option>
+                            <option value="4.5">4.5</option>
+                            <option value="4">4 </option>
+                            <option value="3.5">3.5</option>  
+                            <option value="3">3</option>
+                            <option value="2.5">2.5</option>
+                            </select>
+                        </td>
+                      
+                       
+                    </tr>
+
+                    <tr id="row5">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="H" class="form-label">
+                            Высота установки трубопровода, м <img src="/static/python/img/vop_ico13.png" title="Введите высоту в метрах" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="H" id="H" class="wiget" min="0" max="30" step="any" value="10" required></td>
+                       
+                    </tr>
+                                
+
+                    <tr id="row6">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s2" class="form-label">
+                            <span id="s2_t">Расстояние от извещателя до первого отверстия, м</span> 
+                            </label>
+                        </td>
+
+                        <td style="text-align: right;"><input type="number" name="s2" id="s2" class="wiget" min="1"  value="10" required></td>
+                    </tr>
+
+                   
+                    <tr id="row7">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s1" class="form-label">
+                            <span id="s1_t">Расстояние от извещателя до последнего отверстия, м</span> 
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="s1" id="s1" class="wiget" min="1" max="150" step="1" value="2" required></td>
+                      
+                    </tr>
+
+                </table> 
+             
+                <div class="form-group" style="display: flex; gap: 20px;">
+                   
+                    <button type="submit" id="submit-btn" class="button submit-btn" name = "submit">Подобрать</button>
+                    <button type="button" id="getpdf" name = "getpdf" class="button submit-btn" > ⬇️ Скачать PDF </button>
+                   
+                    
+                </div>
+                <div class="smessage"><span id="smessage"></span> 
+                </div>
+                
+          
+                 
+            </form>
+       
+        </div>
+                  
+        <div class="container body-content" id="body-content"></div>   
+        
+        
+
+    </div>
+    
+</body>
+<script>
+    function change_v() {
+        let s = document.getElementById("vetk")
+        if (s.value == "1") { document.getElementById("s2_t").innerHTML = "Расстояние от извещателя до первого отверстия, м"; }
+        else { document.getElementById("s2_t").innerHTML = "Расстояние от извещателя до разветвления, м"; }
+    
+    }
+    function change_vers() {
+     
+    
+    }
+   
+    let csrfToken = '';
+
+    // Функция для получения CSRF токена из cookies
+    function getCSRFToken() {
+        if (csrfToken) return csrfToken;
+        
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, 'csrftoken'.length + 1) === ('csrftoken' + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring('csrftoken'.length + 1));
+                    break;
+                }
+            }
+        }
+        csrfToken = cookieValue;
+        return cookieValue;
+    }
+
+
+    function validateRequiredInputs() {
+    const requiredInputs = document.querySelectorAll('input[required]');
+    const invalidInputs = [];
+    
+    requiredInputs.forEach(input => {
+        if (!input.value.trim()) {
+            invalidInputs.push(input);
+            input.style.borderColor = 'red';
+        }
+        else 
+        input.style.borderColor = '';
+    });
+    
+    return invalidInputs;
+}
+ 
+    class ButtonHandler 
+    {
+        constructor() 
+        {
+        this.buttons = document.querySelectorAll('.button');
+        
+        this.init();
+        }
+
+        init()
+        {
+       
+          
+            this.buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    this.handleButtonClick(e.target);
+                    
+                });
+         
+            });
+            
+        }
+
+        showMessage(text, type) 
+        {
+            const messageDiv = document.getElementById('smessage');
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+        }
+
+        
+        
+                
+        async handleButtonClick(button) 
+        {   const buttonName = button.getAttribute('name');
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const pdfBtn = document.getElementById('getpdf');
+            const vers = document.getElementById('vers');
+            const h_ust = document.getElementById('H');
+            const vetk_ust = document.getElementById('vetk');
+            const s_otv_ust = document.getElementById('s_otv');
+            const s_ust = document.getElementById('s2');
+            const otv_ust = document.getElementById('otv');
+            const s_vetk = document.getElementById('s1');
+            
+            const r_content = document.getElementById('body-content');
+
+            var new_min=Math.round(parseFloat(s_ust.value)+parseFloat(s_otv_ust.value)*(parseFloat(otv_ust.value)-1));
+            s_vetk.setAttribute("min",new_min);
+            if (parseFloat(s_vetk.value)<new_min)
+            {
+                s_vetk.value=new_min;
+            }
+
+            const invalidInputs = validateRequiredInputs();
+                              
+        
+            if (invalidInputs.length > 0) {
+               
+                alert('Заполните все обязательные поля!');
+            } 
+            else {
+                 
+                // Блокируем кнопки
+                if (buttonName === 'submit') {
+                    submitBtn.disabled = true;
+                }    
+                if (buttonName === 'getpdf') {
+                    pdfBtn.disabled = true;
+                    this.showMessage('Генерируется PDF');
+                }              
+
+                // Подготавливаем данные
+                const data = {
+                    button_name: buttonName,
+                    param1: vers.value,
+                    param2: h_ust.value,
+                    param3: vetk_ust.value,
+                    param4: s_otv_ust.value,
+                    param5: s_ust.value,
+                    param6: otv_ust.value,
+                    param7: s_vetk.value
+
+                };
+               
+                
+               
+                try{
+                    // Отправляем запрос
+                    const response = await fetch('ajax-handler/', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+
+                    if (buttonName === 'getpdf' && response.ok) 
+                    {
+                        // Обработка PDF ответа
+                       
+                        const blob = await response.blob();
+                        pdfBtn.disabled = false;
+                        this.downloadPDF(blob);
+                        this.showMessage('PDF успешно сгенерирован и скачан!', 'success');
+                        pdfBtn.style.visibility = "hidden";
+                       
+
+                    }
+                    else if (buttonName === 'submit' && response.ok) 
+                    {
+                       
+                        //Обработка JSON ответа
+                        const data = await response.json();   
+                        
+                        
+                     
+                        submitBtn.disabled = false;
+                        pdfBtn.style.visibility = "visible";
+                        r_content.style.visibility = "visible";
+                        this.showMessage('');
+                        if (data.status === 'success') {
+                            r_content.innerHTML = data.message;
+                            
+                        } 
+                        else 
+                        {
+                             // Восстанавливаем кнопки при ошибке
+                            if (buttonName === 'submit') {
+                              
+                                submitBtn.disabled = false;
+                            }
+                            if (buttonName === 'getpdf') {
+                              
+                                pdfBtn.disabled = false;
+                            }
+                            this.showMessage('Ошибка: ' + data.message, 'error');
+
+                        }
+                          //  return response.json();    
+
+                    }
+                    else
+                    { // Восстанавливаем кнопки при ошибке
+                        if (buttonName === 'submit') {
+                           
+                            submitBtn.disabled = false;
+
+
+                        }
+                       
+                            this.showMessage('Ошибка: ' + response.message, 'error');
+                        
+                    }
+
+
+                        
+                }
+                catch(error) 
+                {
+                        // Восстанавливаем кнопки при ошибке
+                        if (buttonName === 'submit') {
+                           
+                            submitBtn.disabled = false;
+ 
+                        }
+                                    
+                        this.showMessage('Ошибка сети: ' + error.message, 'error');
+                }
+            
+            }
+        }
+        
+       
+        
+        downloadPDF(blob)
+        {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `document_${new Date().toISOString().slice(0, 10)}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        new ButtonHandler();
+        
+    });
+            
+    
+</script>
+{% endblock %}

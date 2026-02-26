@@ -8,17 +8,20 @@ from . import  views
 from .views import index
 from .urls_api import api
 
+from .views import detector
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("", index),
     path("sprinkler/", include("sprinkler.urls")),
-    # path('', views.index, name='index'),
     path('ayp/', views.new_view, name='new'),
     path('editor/', views.editor_view, name='editor'),
     path("api/", api.urls),
     path("users/", include("users.urls", namespace="users")),
     path('', views.baseaup, name='baseaup'),
     path("ipa/", include("python.urls")),
+    path("irrigation/", views.index, name='index'),
+    path("mpnu/", include("app.urls")),
 
 ]
 
