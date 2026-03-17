@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form id="mainForm" method="post">
+        {% csrf_token %}
+        <div id="container">
+        </div>
+        <button type="submit"> Рассчитать</button>
+    </form>
+
+
+<script>
+function createBranchHTML(branchNum) {
+    return `
+      <form id="calc-form-tube-${branchNum}">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-4 col-form-label">Тип трубы</label>
+              <div class="col-sm-8">
+                <select class="form-select" required name="TubeType" id="TubeType-${branchNum}">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-4 col-form-label">Параметры трубы</label>
+              <div class="col-sm-8">
+                <select class="form-select" required id="TubeParams-${branchNum}"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-10 col-form-label">Геометрическая высота диктующего оросителя над осью пожарного насоса Н, м</label>
+              <div class="col-sm-2">
+                <input type="number" class="form-control" required min="2" max="20" step="0.1" value="7.00">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-4 col-form-label">Удельная характеристика K</label>
+              <div class="col-sm-8" id="KTValue-${branchNum}" nowrap></div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <table class="table branchTable" id="branchTable-${branchNum}">
+        <thead>
+          <th style="width: 150px" class="text-center">Наименование</th>
+          <th style="width: 100px" class="text-center">Длина, м</th>
+          <th style="width: 100px" class="text-center">Высотная отметка, м</th>
+          <th class="text-center">Потери давления, м вод. ст.</th>
+          <th class="text-center">Расход, л/с</th>
+          <th class="text-center">Давление, м вод. ст.</th>
+          <th style="width: 100px" class="text-center">Действия</th>
+        </thead>
+        <tbody>
+          ${[1,2,3,4,5].map(i => `
+            <tr data-num="${i}" data-type="sprinkler" class="sprinkler-row">
+              <td nowrap>Ороситель ${i}${branchNum}</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="Q_sprinkler_value text-center"></td>
+              <td class="P_sprinkler_value text-center"></td>
+              <td class="text-center">
+                <button type="button" class="btn btn-sm delete-sprinkler" data-num="${i}" data-branch="${branchNum}" style="background-color: #0F1379; color: white; border: none;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+            <tr data-num="${i}" data-type="section" class="section-row">
+              <td nowrap>Участок ${branchNum}</td>
+              <td><input type="number" class="form-control section-length" name="height" required min="0" step="0.1"></td>
+              <td><input type="number" class="form-control section-length" name="height" required min="0" step="0.1"></td>
+              <td class="P_loss_value text-center"></td>
+              <td class="Q_section_value text-center"></td>
+              <td class="P_section_value text-center">-</td>
+              <td class="Q_total_value text-center" style="display: none;"></td>
+              <td></td>
+            </tr>
+          `).join('')}
+          <tr data-type="node" class="node-row" id="node-row-${branchNum}">
+            
+            <td nowrap>Узел <span class="node-label">${branchNum}</span></td>
+            <td class="node-length text-center">-</td>
+            <td class="node-P-loss text-center">-</td>
+            <td class="node-Q text-center">-</td>
+            <td class="node-P text-center">-</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table> `
+}
+
+const container = document.querySelector("#container");
+const branchTab = document.createElement('li')
+branchTab.className = 'nav-item'
+branchTab.setAttribute('role', 'presentation')
+branchTab.innerHTML = createBranchHTML(3)
+container.appendChild(branchTab)
+
+
+
+</script>
+{% endblock %}

@@ -6,7 +6,8 @@ from . import  views
 
 
 from .views import index
-from .urls_api import api
+from .urls_api import api as api1
+# from api.views import forms_test
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -14,11 +15,12 @@ urlpatterns = [
     path("sprinkler/", include("sprinkler.urls")),
     path('ayp/', views.new_view, name='new'),
     path('editor/', views.editor_view, name='editor'),
-    path("api/", api.urls),
+    path("api/", api1.urls),
     path("users/", include("users.urls", namespace="users")),
     path('', views.baseaup, name='baseaup'),
     path("ipa/", include("python.urls")),
     path("irrigation/", views.index, name='index'),
+    path("test/", include("api.urls")),
 
 ]
 

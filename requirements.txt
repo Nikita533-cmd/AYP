@@ -18,3 +18,8 @@ pydantic==2.5.3
 django-ninja==1.2.2
 weasyprint==60.2
 pydyf==0.10.0
+mysql.connector
+numpy
+reportlab
+matplotlib
+pdfkit

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+      <form id="calc-form-connection-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-8 col-form-label">Длина соединенasия между ветвями, м</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control connection-length" id="connection-length-${connectionNum}" required min="0" step="0.1" value="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row tube-params-block" id="tube-params-block-connection-${connectionNum}" style="display: none;">
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-4 col-form-label">Тип трубы</label>
+              <div class="col-sm-8">
+                <select class="form-select" name="TubeType" id="TubeType-connection-${connectionNum}">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row my-4">
+              <label for="group" class="col-sm-4 col-form-label">Параметры трубы</label>
+              <div class="col-sm-8">
+                <select class="form-select" id="TubeParams-connection-${connectionNum}"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-4" id="kt-value-row-connection-${connectionNum}" style="display: none;">
+          <div class="col-md-6">
+            <div class="row">
+              <label for="group" class="col-sm-4 col-form-label">Удельная характеристика K</label>
+              <div class="col-sm-8" id="KTValue-connection-${connectionNum}" nowrap>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div id="connection-results-${connectionNum}" style="display: none;">
+        <table class="table">
+          <thead>
+            <th class="text-center">Расход на входе, л/с</th>
+            <th class="text-center">Потери давления, м вод. ст.</th>
+            <th class="text-center">Давление на выходе, м вод. ст.</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center" id="connection-Q-in-${connectionNum}"></td>
+              <td class="text-center" id="connection-P-loss-${connectionNum}"></td>
+              <td class="text-center" id="connection-P-out-${connectionNum}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="branch" data-branch="{{ branch_num }}">
+    {{ branch_form.sprinklers.management_form }}
+    <h3>🌿 Ветка {{ branch_num }}</h3>
+    
+    {% for sprinkler_form in branch_form.sprinklers %}
+        <div class="sprinkler formset-row">
+            {{ sprinkler_form.length }}
+            {{ sprinkler_form.diameter }}
+            {{ sprinkler_form.pressure }}
+            ываыв
+            {{ sprinkler_form.flow }}
+        </div>
+    {% endfor %}
+</div>

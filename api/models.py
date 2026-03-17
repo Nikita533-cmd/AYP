@@ -1,12 +1,12 @@
-from django.db import models
+# from django.db import models
 
-from tubes import Type
+# from tubes import Type
 
-class Tube(Type):
-    pass
+# class Tube(Type):
+#     pass
     
 
 
-class Branch(models.Model):
-    pass
+# class Branch(models.Model):
+#     pass
 

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Динамические формы</title>
+    <style>
+        .form-group { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .branch { background: #e8f5e8; margin: 15px 0; padding: 20px; border-left: 5px solid #28a745; border-radius: 8px; }
+        .sprinkler { background: #f8f9fa; margin: 10px 0; padding: 15px; border-radius: 5px; border-left: 3px solid #007bff; }
+        .controls { background: #f0f8ff; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        input[type="number"] { width: 120px; display: inline-block; }
+        button { padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        h3 { margin: 0 0 15px 0; color: #28a745; }
+        h4 { margin: 0 0 10px 0; color: #007bff; }
+    </style>
+</head>
+<body>
+
+
+  
+<div class="container" style="max-width: 900px;">
+    
+    <!-- ГЛОБАЛЬНЫЙ КОНТРОЛЛЕР -->
+    <div class="controls">
+        <label>Общее количество веток: 
+            <input type="number" id="totalBranches" value="3" min="1" max="10">
+        </label>
+        <button onclick="generateAllForms()" style="margin-left: 20px;">🔄 Обновить все</button>
+    </div>
+
+    <form id="mainForm" method="post">
+      {% csrf_token %}
+        <div id="formsContainer"></div>
+        <button type="submit" style="margin-top: 20px;">🚀 Рассчитать систему</button>
+    </form>
+</div>
+
+<script>
+let branchSprinklerCounts = {}; // Хранилище количества оросителей для каждой ветки
+
+function generateAllForms() {
+    const totalBranches = Math.max(1, parseInt(document.getElementById('totalBranches').value) || 3);
+    
+    // Инициализация счетчиков для новых веток
+    for(let i = 1; i <= totalBranches; i++) {
+        if(!branchSprinklerCounts[i]) {
+            branchSprinklerCounts[i] = 2; // По умолчанию 2 оросителя
+        }
+    }
+    
+    generateFormsContainer();
+}
+
+function generateFormsContainer() {
+    const totalBranches = Math.max(1, parseInt(document.getElementById('totalBranches').value) || 3);
+    let html = '';
+    
+    for(let branch = 1; branch <= totalBranches; branch++) {
+        const sprinklersCount = branchSprinklerCounts[branch] || 2;
+        
+        html += `
+            <div class="branch">
+                <h3>🌿 Ветка ${branch}</h3>
+                
+                <!-- КОНТРОЛЛЕР оросителей ДЛЯ ЭТОЙ ветки -->
+                <div style="margin-bottom: 15px; padding: 10px; background: #fff3cd;">
+                    Оросителей на ветке ${branch}: 
+                    <input type="number" id="branch_${branch}_count" value="${sprinklersCount}" 
+                           min="1" max="8" onchange="updateBranchForms(${branch})" style="width:80px;">
+                </div>
+        `;
+        
+        // Генерация оросителей для этой ветки
+        for(let sprinkler = 1; sprinkler <= sprinklersCount; sprinkler++) {
+            html += `
+                <div class="sprinkler">
+                    <h4>💧 Ороситель ${sprinkler}</h4>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="number" name="branch_${branch}_spr_${sprinkler}_length" 
+                               placeholder="Длина участка, м" step="0.1">
+                        <input type="number" name="branch_${branch}_spr_${sprinkler}_diameter" 
+                               placeholder="Диаметр, мм">
+                        <input type="number" name="branch_${branch}_spr_${sprinkler}_pressure" 
+                               placeholder="Давление, бар" step="0.1">
+                        <input type="number" name="branch_${branch}_spr_${sprinkler}_flow" 
+                               placeholder="Расход, л/ч">
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += `</div>`;
+    }
+    
+    document.getElementById('formsContainer').innerHTML = html;
+}
+
+// Обновление форм для конкретной ветки
+function updateBranchForms(branchNum) {
+    const count = parseInt(document.getElementById(`branch_${branchNum}_count`).value) || 2;
+    branchSprinklerCounts[branchNum] = count;
+    generateFormsContainer(); // Перерисовка всего
+}
+
+// Инициализация
+generateAllForms();
+</script>
+</body>
+</html>
+{% endblock %}

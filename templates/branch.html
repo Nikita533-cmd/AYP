@@ -1,0 +1,34 @@
+{% comment %} <div class="branch" data-branch="{{ branch_num }}">
+    {{ formset.management_form }}
+    {% csrf_token %}
+    {% for form in formset %}
+        <div class="sprinkler">
+            {{ form.length }}
+            {{ form.diameter }}
+            {{ form.pressure }}
+            {{ form.flow }}
+        </div>
+    {% endfor %}
+</div> {% endcomment %}
+<div data-branch="{{ branch_num }}">
+    {% for form in formset %}
+        <div class="sprinkler row g-3 mb-3 p-3 border rounded" data-sprinkler>
+            <div class="col-md-3">
+                <label>Длина</label>
+                {{ form.length }}
+            </div>
+            <div class="col-md-3">
+                <label>Диаметр</label>
+                {{ form.diameter }}
+            </div>
+            <div class="col-md-3">
+                <label>Давление</label>
+                {{ form.pressure }}
+            </div>
+            <div class="col-md-3">
+                <label>Расход</label>
+                {{ form.flow }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

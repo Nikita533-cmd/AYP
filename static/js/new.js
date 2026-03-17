@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
   // форма //
   const
-   formAutoUpdateItems = document.querySelectorAll(".auto-update"),
-   form = document.querySelector('#calc-form'),
+  formAutoUpdateItems = document.querySelectorAll(".auto-update"),
+  form = document.querySelector('#calc-form'),
+
    otvEl = document.querySelector('#otv'),
    resultsBlock = document.querySelector('#results-block'),
    otvOptions = Array.from(otvEl.children),
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
       showSkladHeight = skladHeightEnableValues.includes(values.group);
 
     // управляем полем с высотой склада
+    // alert(data.keys)
     skladHeightEl.disabled = !showSkladHeight
     if(showSkladHeight){
       skladHeightBlockEl.classList.remove("d-none")
@@ -440,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
         </div>
       </form>
+      
       <table class="table branchTable" id="branchTable-${branchNum}">
         <thead>
           <th style="width: 150px" class="text-center">Наименование</th>
@@ -449,6 +452,8 @@ document.addEventListener("DOMContentLoaded", function() {
           <th class="text-center">Давление, м вод. ст.</th>
           <th style="width: 100px" class="text-center">Действия</th>
         </thead>
+        <form id="calc-branchTable-234">
+        <input type="number" class="form-control section-length" name="height" required min="0" value="222222" step="0.1">
         <tbody>
           ${[1,2,3,4,5].map(i => `
             <tr data-num="${i}" data-type="sprinkler" class="sprinkler-row">
@@ -467,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </tr>
             <tr data-num="${i}" data-type="section" class="section-row">
               <td nowrap>Участок ${i}${getBranchLetter(branchNum).toLowerCase()}-${i+1}${getBranchLetter(branchNum).toLowerCase()}</td>
-              <td><input type="number" class="form-control section-length" required min="0" step="0.1"></td>
+              <td><input type="number" class="form-control section-length" name="height" required min="0" step="0.1"></td>
               <td class="P_loss_value text-center"></td>
               <td class="Q_section_value text-center"></td>
               <td class="P_section_value text-center">-</td>
@@ -485,6 +490,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <td></td>
           </tr>
         </tbody>
+        </form>
         <tfoot>
           <tr>
             <td colspan="6">
@@ -1868,7 +1874,29 @@ document.addEventListener("DOMContentLoaded", function() {
     // Собираем данные из формы
     const formData = new FormData(form)
     const formValues = Object.fromEntries(formData.entries())
+    // alert(formData.entries())
+    // alert(formValues)
+//     const formData = new FormData(form);
+    alert(`Количество полей: ${Object.keys(formValues).length}\n\n` + 
+          Object.entries(formValues).map(([key, value]) => `${key}: ${value}`).join('\n'));
+// // // Показать все данные формы
+// // console.log([...formData.entries()]);calc-form-tube
+    const form1 = document.querySelector('#calc-branchTable-234')
+    if (!form1) {
+    alert('Форма с id="calc-form-tube" не найдена!');
+    return;
+    }
+    const formData1 = new FormData(form1)
+    const formValues1 = Object.fromEntries(formData1.entries())
+// // Количество полей
+    alert(`Количество полей: ${Object.keys(formValues1).length}\n\n` + 
+          Object.entries(formValues1).map(([key, value]) => `${key}: ${value}`).join('\n'));
 
+
+      const allForms = document.querySelectorAll('form');
+      allForms.forEach((form, i) => {
+          alert(`Форма ${i+1}: id="${form.id}", name="${form.name}"`);
+      });
     // Собираем данные ветвей (старый формат для совместимости)
     const branches = {}
     for (const branchNum in kt_values) {

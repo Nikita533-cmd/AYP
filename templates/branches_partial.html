@@ -1,0 +1,15 @@
+<!-- templates/partials/branches_partial.html -->
+{% for branch_num in "xxxxxxxxxx"|make_list|slice:branches_count %}
+<div class="branch mb-4 p-4 border rounded" data-branch="{{ branch_num|add:1 }}">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>🌿 Ветка {{ branch_num|add:1 }}</h4>
+        <input type="number" class="form-control w-auto d-inline" 
+               id="branch_{{ branch_num|add:1 }}_sprinklers" value="2" min="1" max="8"
+               onchange="updateBranchForms({{ branch_num|add:1 }})" style="width: 100px;">
+    </div>
+    
+    <div class="sprinkler-container" data-branch="{{ branch_num|add:1 }}">
+        <!-- JS сгенерирует оросители -->
+    </div>
+</div>
+{% endfor %}

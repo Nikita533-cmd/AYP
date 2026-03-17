@@ -57,12 +57,19 @@ class SaveCalculationResultAPI(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        data = request.data
+        sprinkler = request.data['sprinkler']
+        branches = request.data['branches']
+        branchDetails = request.data['branchDetails']
+        feedPipe = request.data['feedPipe']
+
 
         # Создаем запись с результатами расчета
         calculate_result = CalculateResult.objects.create(
             user=request.user if request.user.is_authenticated else None,
-            data=data
+            sprinkler=sprinkler, branches=branches,
+            branchDetails=branchDetails,
+            feedPipe=feedPipe,
+
         )
 
         return Response(

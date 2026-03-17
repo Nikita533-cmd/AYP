@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     "tubes",
     "management_node",
     "python",
+    # "app",
+    "api",
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

@@ -11,3 +11,6 @@ class UserSerializer(serializers.ModelSerializer):
             "ini",
             "is_superuser",
         )
+
+# class BrnchSerializer(serializers.Serializer):
+#     branchDetails = serializers.CharField(max_length=10)

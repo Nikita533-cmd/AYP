@@ -48,7 +48,10 @@ class CalculateResult(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name="Пользователь")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    data = models.JSONField(verbose_name="Данные расчета", default=dict)
+    branches = models.JSONField(verbose_name="Ветви", default=dict)
+    branchDetails = models.JSONField(verbose_name="Данные ветки", default=dict)
+    feedPipe = models.JSONField(verbose_name="Подводящий трубопровод", default=dict)
+    sprinkler = models.JSONField(verbose_name="Ороситель", default=dict)
 
     class Meta:
         verbose_name = "Результат расчета"

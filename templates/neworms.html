@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система орошения</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg border-0">                    
+                    <div class="card-body p-5">
+                        <!-- Количество ветвей -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-lg-8">
+                                <label class="form-label fs-5 fw-bold mb-3">Количество ветвей:</label>
+                                <input type="number" id="branchesCount" 
+                                       class="form-control form-control-lg border-primary" 
+                                       value="1" min="1" max="10">
+                            </div>
+                        </div>
+
+                        <!-- 🔥 Django Management Form -->
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    
+    {% if formset.non_form_errors %}
+        <div class="alert alert-danger">
+            {{ formset.non_form_errors }}
+        </div>
+    {% endif %}
+    
+    <div id="branchesContainer"></div>
+    <button type="submit" class="btn btn-success">Рассчитать</button>
+</form>
+
+<!-- 🔥 Показываем ошибки полей -->
+{% for form in formset %}
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <h6>Форма {{ forloop.counter }}:</h6>
+            {{ form.errors }}
+        </div>
+    {% endif %}
+{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+let branches = [];
+
+document.getElementById('branchesCount').addEventListener('input', function() {
+    const count = parseInt(this.value);
+    if (count >= 1 && count <= 10) {
+        createBranches(count);
+    }
+});
+
+function createBranches(count) {
+    const container = document.getElementById('branchesContainer');
+    container.innerHTML = '';
+    branches = [];
+    
+    for(let i = 1; i <= count; i++) {
+        const branch = createBranchElement(i);
+        container.appendChild(branch);
+        branches.push({id: i, sprinklersCount: 1});
+    }
+    
+    updateManagementForm();
+}
+
+function createBranchElement(branchNum) {
+    const branchDiv = document.createElement('div');
+    branchDiv.className = 'branch card shadow-sm mb-5 border-primary';
+    branchDiv.dataset.branch = branchNum;
+    
+    branchDiv.innerHTML = `
+        <div class="card-header bg-primary text-white p-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <h4 class="mb-0 fw-bold">Ветка ${branchNum}</h4>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-white text-dark border-primary fs-6 fw-semibold">
+                        Оросителей:
+                    </span>
+                    <input type="number" class="form-control sprinkler-count fw-bold text-primary border-primary" 
+                           value="1" min="1" max="20" style="width: 90px;"
+                           onchange="updateSprinklers(${branchNum}, this.value)"
+                           onkeydown="if(event.key==='Enter') updateSprinklers(${branchNum}, this.value)">
+                    <button class="btn btn-outline-light border-0 shadow-sm" type="button"
+                            onclick="updateSprinklers(${branchNum}, this.previousElementSibling.value)">
+                        Обновить
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="sprinklers-container p-4 bg-light" data-sprinklers="${branchNum}">
+                <div class="text-center p-5 text-muted">
+                    Введите количество оросителей и нажмите "Обновить"
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return branchDiv;
+}
+
+async function updateSprinklers(branchNum, count) {
+    const container = document.querySelector(`[data-sprinklers="${branchNum}"]`);
+    const branch = branches.find(b => b.id == branchNum);
+    
+    if (!branch || parseInt(count) === branch.sprinklersCount || count < 1 || count > 20) return;
+    
+    container.innerHTML = '<div class="text-center p-5"><div class="spinner-border text-primary"></div></div>';
+    
+    try {
+        const response = await fetch(`/test/branch/${branchNum}/?count=${count}`);
+        if (!response.ok) throw new Error('Ошибка сервера');
+        const html = await response.text();
+        container.innerHTML = html;
+        branch.sprinklersCount = parseInt(count);
+        updateManagementForm();
+    } catch (error) {
+        container.innerHTML = '<div class="alert alert-danger">Ошибка загрузки</div>';
+    }
+}
+
+function updateManagementForm() {
+    const totalSprinklers = document.querySelectorAll('[data-sprinkler]').length;
+    const totalInput = document.querySelector('[name="form-TOTAL_FORMS"]');
+    if (totalInput) totalInput.value = totalSprinklers;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('branchesCount').dispatchEvent(new Event('input'));
+});
+</script>
+</body>
+</html>

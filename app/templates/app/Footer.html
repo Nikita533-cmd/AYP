@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+   <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">-->
+    <style>
+                
+                @font-face {
+
+                font-family: 'Roboto';
+                src: url('file:///home/i/itsabijt/test/public_html/static/app/fonts/Roboto.ttf') format('truetype');
+
+               /* src: url('file:///home/i/itsabijt/test/public_html/static/app/fonts/DejaVuSans/TimesNewRomanRegular.ttf') format('truetype');*/
+                font-weight: normal;
+            
+                font-style: normal;
+                }
+                
+                
+                body {
+            position: relative;
+            font-family: "Roboto";
+            font-size: 16px;
+            margin-bottom: 0;
+            margin-top: 40px;
+            margin-left: 150px;
+            padding: 0 10px;
+            width: 100%;
+            color: black;
+        }
+
+        .footer {
+            position: relative;
+            top: 10px;
+            width: 90%;
+            /*margin-right: -100px;*/
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            margin-right: 0px;
+            margin-left: auto;
+            border-left: 10px solid red;
+            border-top: 10px solid red;
+            /*border-radius: 8px;*/
+            border-bottom: 1px solid white;
+            border-right: 1px solid white;
+            table-layout: fixed;
+            border-top-left-radius: 8px;
+        }
+
+        colgroup col:nth-child(1),
+        colgroup col:nth-child(2),
+        colgroup col:nth-child(3) {
+            width: 30%;
+        }
+
+        colgroup col:nth-child(4) {
+            width: 10%;
+        }
+
+        tbody {
+            text-align: right;
+        }
+
+            tbody tr td {
+                border-bottom: none;
+                padding: 2px 5px;
+            }
+
+                tbody tr td:first-child,
+                tbody tr td:nth-child(2) {
+                    text-align: left;
+                }
+    </style>
+</head>
+<body>
+    <div class="footer">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>ОГРН 1022200554012</td>
+                    <td>ЗАО «ПО «Спецавтоматика»</td>
+                    <td>8-800-2008-208 доб.219</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ОКПО 03701001</td>
+                    <td>ул. Лесная, 10, г.Бийск</td>
+                    <td>sa-biysk.ru   sales@sa-bisk.ru</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ИНН/КПП 2227005952/222701001</td>
+                    <td>Алтайский край, Россия, 659316</td>
+                    <td>https://sa-biysk.ru/</td>
+                    <td></td>
+                </tr>
+                <!-- Пустые строки для выравнивания -->
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
