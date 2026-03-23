@@ -59,16 +59,16 @@
      <article style="margin-bottom: 40px; ">
         <a class="article1" >
         <!-- <a class="article1" href="ipa/" >    -->
-            <!-- <div class="container module">
-                <div class="viewer-container"> -->
+            <div class="container module">
+                <div class="viewer-container"> 
                 <!-- <h2 style="color: #333; margin-bottom: 15px;">ДАЭ 100.414.000 СБ</h2> -->
-                <!-- <canvas id="renderCanvas"></canvas>
+                <canvas id="renderCanvas" style="width: 1000px; height: auto;"></canvas>
                 <p style="color: #666; margin-top: 10px; font-size: 14px;">
                     ЛКМ+drag: вращение | Колёсико: зум
                 </p>
-            </div> -->
+            </div>
                 
-                <div id="viewer" style="width:400px;height:300px;border:1px solid #ccc;"></div>              
+                <!-- <div id="viewer" style="width:400px;height:300px;border:1px solid #ccc;"></div>               -->
 
 
                 <!-- <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa"> -->
@@ -97,7 +97,7 @@
 
 </div>
 
-<script>
+<!-- <script>
    $(function(){
     // Массив из 7 ваших изображений (полные пути)
     
@@ -119,10 +119,10 @@
     });
 });
 
-</script>
+</script> -->
 
 
-<!-- <script>
+<script>
         const canvas = document.getElementById("renderCanvas");
         const engine = new BABYLON.Engine(canvas, true);
         
@@ -275,7 +275,7 @@
         const scene = createScene();
         engine.runRenderLoop(() => scene.render());
         window.addEventListener("resize", () => engine.resize());
-    </script> -->
+    </script>
 
 
     
