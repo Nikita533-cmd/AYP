@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+   
+    <link rel="stylesheet"  href="{% static 'css/site.css' %}"/>
+    
+    <!-- <link rel="stylesheet" href="{% static 'css/fonts.css' %}"/> -->
+<!-- <head>
+    <meta charset="utf-8"/>
+    
+    {% load static %}
+    <link rel="stylesheet"  href="{% static 'python/site.css' %}"/>
+    <link rel="stylesheet" href="{% static 'python/fonts.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" />
+
+</head>-->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
+<body>
+
+
+    <title>Подбор диаметров отверстий аспирационной системы</title>
+
+    <!-- <header id="Head">
+        <div class="d-flex flex-wrap align-items-center justify-content-start" style="height: 100%;">
+            <a href="https://sa-biysk.ru/" class="logo_up align-items-center me-lg-auto" style="justify-content: flex-start;">
+            
+    
+                <img src="/static/python/img/logo.svg" role="img" aria-label="Спецавтоматика" class="logo" style=" justify-content: flex-start;" />
+            </a>
+            <div class="d-none d-sm-block me-4">
+    
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+    
+                    <li>
+                        <a href="tel:8-800-2008-208" class="nav-link text-white">8-800-2008-208</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header> -->
+
+    <div class="container my-4">
+
+        <nav aria-label="breadcrumb">
+            <!-- <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="https://sa-biysk.ru/" class="grey-dark">
+                        <img src="{% static 'images/icons/home.png' %}" style="margin-bottom: 2px;">
+                        Главная
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+            </ol> -->
+            <h1>Подбор диаметров отверстий аспирационной системы</h1>
+        </nav>
+    </div>
+
+
+    <div class="container container-gray" style="min-height: 10px;">
+        <div class="container Form-TY3" style="min-height: 10px;">
+            <h2>Параметры воздухозаборной системы</h2>
+            <form method="post" id="form1"  >
+                {% csrf_token %}
+
+                <input type="hidden" name="csrfmiddlewaretoken" value="nrAZtTQzZm0kXQJBybLf4TxRWrqitsUFC5Sh4WUDKCHTNhhL8bibWVk1LQFfxpaS">
+                <input type="hidden" name="which_form_is_it" value="form1">
+                <input type="hidden" id="key_mpny" name="key_mpny" value="None">
+
+
+
+
+
+                 <table class="pred-param2">
+                    <colgroup>
+                        <col style="width: 65%;">
+                        <col style="width: 25%;">
+                        <col style="width: 10%;">
+                    </colgroup>
+                    <tr id="row1">
+                        <td style="text-align: left; padding-left: 0px;">                            
+                            <label for="vers" class="form-label">
+                            Версия извещателя 
+                            </label>                            
+                        </td>
+                        <td style="text-align: right;">
+                            <select id="vers" name="vers" class="wiget" onchange="change_vers()">
+                                <option value="ИПАv5">ИПАv5</option>
+                                <option value="ИПА-Селект">ИПА-Селект</option>
+                            </select>
+                        </td>
+                        <td style="text-align: left;">-</td>
+                    </tr>
+                    <tr id="row2">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="vetk" class="form-label">
+                            Количество веток <img src="{% static 'images/vop_ico13.png' %}" title="Выберите количество веток" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            </label>
+                        </td>
+                        <td style="text-align: right;">
+                            <select name="vetk" id="vetk"  class="wiget" onchange="change_v()">
+                            <option value="1">1 ветка</option>
+                            <option value="2">2 ветки</option>
+                            <option value="4">4 ветки</option>
+                            </select>
+                        </td>
+                        <td style="text-align: left;">шт.</td>
+                    </tr>
+                    <tr id="row3">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="otv" class="form-label">
+                            Количество отверстий на одной ветке 
+                            </label>
+                        </td>
+                        <td style="text-align: right;">
+                            <input type="number" name="otv" id="otv" class="wiget" min="1" max="21" step="any" value="2" required></td>
+                        <td style="text-align: left;">шт.</td>
+                    </tr>
+                    <tr id="row4">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s_otv" class="form-label">
+                            Расстояние между отверстиями 
+                            </label>
+                        </td>
+                        <td style="text-align: right;">
+                            <select name="s_otv" id="s_otv" class="wiget">
+                            <option value="12">12</option>
+                            <option value="11.5">11.5</option>
+                            <option value="11">11 </option>
+                            <option value="10.5">10.5</option> 
+                            <option value="10">10</option> 
+                            <option value="9.5">9.5</option> 
+                            <option value="9">9</option>
+                            <option value="8.5">8.5</option>
+                            <option value="8">8 </option>
+                            <option value="7.5">7.5</option> 
+                            <option value="7">7</option>
+                            <option value="6.5">6.5</option>
+                            <option value="6">6 </option>
+                            <option value="5.5">5.5</option>  
+                            <option value="5">5</option>
+                            <option value="4.5">4.5</option>
+                            <option value="4">4 </option>
+                            <option value="3.5">3.5</option>  
+                            <option value="3">3</option>
+                            <option value="2.5">2.5</option>
+                            </select>
+                        </td>
+                        <td style="text-align: left;">м</td>
+                    </tr>
+                    <tr id="row5">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="H" class="form-label">
+                            Высота установки трубопровода <img src="{% static 'images/vop_ico13.png' %}" title="Введите высоту в метрах" style="cursor: help; width:18px; height:18px; vertical-align:middle;">
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="H" id="H" class="wiget" min="0" max="30" step="any" value="10" required></td>
+                        <td style="text-align: left;">м</td>
+                    </tr>
+
+                    <tr id="row6">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s2" class="form-label">
+                            <span id="s2_t">Расстояние от извещателя до первого отверстия</span> 
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="s2" id="s2" class="wiget" min="1"  value="10" required></td>
+                        <td style="text-align: left;">м</td>
+                    </tr>
+                    
+                    <tr id="row7">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="s1" class="form-label">
+                            <span id="s1_t">Расстояние от извещателя до последнего отверстия</span> 
+                            </label>
+                        </td>
+                        <td style="text-align: right;"><input type="number" name="s1" id="s1" class="wiget" min="1" max="150" step="1" value="2" required></td>
+                        <td style="text-align: left;">м</td>
+                    </tr>
+                </table>
+
+                
+             
+                <div class="form-group" style="display: flex; gap: 20px;">
+                   
+                    <button type="submit" id="submit-btn" class="button submit-btn" name = "submit">Подобрать</button>
+                                       
+                   
+                    
+                </div>
+                <!-- <button type="button" id="getpdf" name = "getpdf" class="button submit-btn" > ⬇️ Скачать PDF </button> -->
+                <button type="button" id="getpdf" name = "getpdf" class="button submit-btn" > Скачать PDF </button>
+                <div class="smessage"><span id="smessage"></span> 
+                </div>
+                
+          
+                 
+            </form>
+       
+        </div>
+                  
+        <div class="container body-content" id="body-content"></div>   
+        
+        
+
+    </div>
+    
+</body>
+{% endblock %}

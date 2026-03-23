@@ -3,6 +3,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-^z(v0s)^+k=#lz5l6jzd%nll)y^57997*jssf_oa@u9=aio^l)"
+# CSRF_COOKIE_SECURE = True
 
 DEBUG = True
 
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     "tubes",
     "management_node",
     "python",
+    "app",
 ]
 
 MIDDLEWARE = [
@@ -158,9 +160,11 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR.parent.parent / "static"
 STATICFILES_DIRS = [
     BASE_DIR.parent / "static",
 ]
+

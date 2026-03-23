@@ -1,0 +1,542 @@
+<html>
+<!-- {% load static %} -->
+<head>  
+<!-- {% load static %} -->
+<!-- <link rel="stylesheet" href="{% static 'python/fonts.css' %}"/> -->
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm 1.5cm 2.5cm 1.5cm;
+      @top-center { content: element(logo-header); width:  100%;/* vertical-align: top;*/} 
+      @bottom-center { content: element(logo-down);   }
+    }
+
+    #logo-header {
+      position: running(logo-header);
+              
+    }      
+        
+    .up_kolontitul {
+      border: none;
+    }
+
+    .up_kolontitul td {
+      border: none;
+      font-size: 12px;
+    }
+
+    #logo-down {
+      width: 100%;
+      position: running(logo-down);
+      margin-left: 3cm;
+      margin-top: 1cm;
+      /* margin-left: 10cm;
+      margin-top: 1.5cm; */
+            
+      /* margin-top: 1cm; */
+                       
+      /* height: 1.8cm;
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+      background: white; */
+      /* padding-right: 40px;
+      max-height: 950px; */
+    }
+
+    .down_kolontitul {
+      border: none;
+      background: white;
+      font-size: 11px;
+      width: 100%;
+      border-collapse: separate;
+            /* margin-right: 0px; */
+            /* margin-left: 10cm; */
+      border-left: 10px solid red;
+      border-top: 10px solid red;
+            /*border-radius: 8px;*/
+      border-bottom: 1px solid white;
+      border-right: 1px solid white;
+      table-layout: fixed;
+      border-top-left-radius: 8px;
+            
+    }
+
+    .down_kolontitul td {
+      border: none;
+      background-color: white;
+    }
+    
+    body {
+      font-family: 'Roboto','DejaVu Sans', Arial, sans-serif;
+      font-size: 20px;
+      margin-bottom: 0;
+      color: #000;
+    }
+
+    .Tabl-2-2 {
+        display: flex;
+        flex-direction: column; /* расположить элементы вертикально */
+        justify-content: center; /* центрировать по вертикали */
+        align-items: center; /* центрировать по горизонтали */
+        max-height: 1300px; /* или фиксированная высота для вертикального центрирования */
+        text-align: center; /* центрируем содержимое по горизонтали */
+    }
+
+    .Tabl-2-3 {
+        font-family: "Roboto";
+        font-size: 17px;
+        max-height: 1300px; /* или фиксированная высота для вертикального центрирования */
+        /*height: 1301px;*/ /* или фиксированная высота для вертикального центрирования */
+    }
+
+    .Tabl-2-4, .Tabl-2-5 {
+        font-family: "Roboto";
+        font-size: 17px;
+        /*height: 1301px;*/ /* или фиксированная высота для вертикального центрирования */
+        max-height: 1300px; /* или фиксированная высота для вертикального центрирования */
+    }
+
+    .main-table, .main-table1, .table-gidr {
+        font-family: "Roboto";
+        font-size: 17px;
+        border-collapse: collapse; /* убрать двойные границы */
+        /*width: 100%;*/ /* занять всю ширину страницы */
+    }
+
+    .main-table td, .main-table th, .main-table1 td, .main-table1 th, .table-gidr td, .table-gidr th {
+        border: 1px solid black; /* Задаёт чёрную границу толщиной 1px */
+        padding: 4px; /* Добавляет отступы внутри ячеек */
+        page-break-inside: avoid; /* Избегать разрыва страницы внутри таблицы */
+    }
+
+    .razm {
+        page-break-after: always; /* Начинает новую страницу после этого элемента */
+    }
+     
+        
+    /* .form-label {
+      text-align: left;
+      font-size: 15px;
+      font-weight: 500;
+      width: 100%;
+    }
+
+    .form-label2 {
+      text-align: left;
+      font-size: 15px;
+      font-weight: 500;
+      width: 100%;
+      line-height: 1.5;
+    } */
+
+    /* .logo-percent {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+    } */
+
+  </style>
+</head>
+<body>
+  <div id="logo-header">
+          <table class="up_kolontitul">
+              <colgroup>
+                  <col style="width: 50%;">   
+                  <col style="width: 50%;">                 
+              </colgroup>
+              <tr>
+                  <td>
+                      <img src="app/img/kostrul.png" alt="Изображение"  style="width: 393px; height: 73px; margin-top: 20px;">
+                      <!-- <img src="/static/images/kostrul.png" alt="Изображение"  style="width: 393px; height: 73px; margin-top: 20px;"> -->
+                       
+                  </td>
+                  <td style="padding-left: 11px;">
+                      Сгенерировано на сайте aup_bsk <br />
+                      Дата: {{ dt }}
+                  </td>
+              </tr>
+          </table>                                    
+                  
+  </div>
+
+
+  <div id="logo-down">
+          <!-- <img src="/static/images/footer.png" alt="Линия" style="width: 100%; height: auto;">  -->
+          <table class="down_kolontitul">
+              <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+              </colgroup>
+              <tbody>
+                  <tr>
+                      <td style="width: 30%;">ОГРН 1022200554012</td>
+                      <td style="width: 30%;">ЗАО «ПО «Спецавтоматика»</td>
+                      <td style="width: 30%;">8-800-2008-208 доб.219</td>
+                      <td style="width: 10%;"></td>
+                  </tr>
+                  <tr>
+                      <td style="width: 30%;">ОКПО 03701001</td>
+                      <td style="width: 30%;">ул. Лесная, 10, г.Бийск</td>
+                      <td style="width: 30%;">sa-biysk.ru   sales@sa-biysk.ru</td>
+                      <td style="width: 10%;"></td>
+                  </tr>
+                  <tr>
+                      <td style="width: 30%;">ИНН/КПП 2227005952/222701001</td>
+                      <td style="width: 30%;">Алтайский край, Россия, 659316</td>
+                      <td style="width: 30%;">https://sa-biysk.ru/</td>
+                      <td style="width: 10%;"></td>
+                  </tr>
+                
+                  <tr><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+          </table>                                    
+                  
+  </div>
+
+<!-- <img src="/static/python/img/lbtopdf.png" alt="Описание изображения" class="logo-percent"> -->
+
+<!-- <p id="datetime">{{ dt }}</p>
+<p id="vb">{{ vb }}</p> -->
+    <div class="container Tabl-1-2" style="padding-right: 40px; max-height: 950px "></div>
+
+        <table class="main-table" style="table-layout: fixed; width: 100% ">
+            <colgroup>
+                <col style="width: 50%;">   <!--1-й столбец (графики)-->
+                <col style="width: 26%;">     <!--2-й столбец-->
+                <col style="width: 11%;">     <!--3-й столбец-->
+                <col style="width: 13%;">     <!--4-й столбец-->
+            </colgroup>
+            <tbody>
+                
+                
+                
+                <tr>
+                    <td class="section-title" colspan="4" style="text-align: center; font-weight: bold; font-size: 20px;">Техническое описание {{Name_MPNY}}</td>
+                </tr>
+
+                <tr>
+
+                    <td class="charts" rowspan="8" style="max-height:200px">
+                        <img src="{{ chart_img_h }}" alt="График 1" style="width: 100%; height: auto">
+                    </td>
+
+                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Запрашиваемые параметры рабочей точки:</td>
+
+                </tr>
+                <tr>
+                    <td>Расход МПНУ</td>
+                    <td>{{Qgl}}</td>
+                    <td>м&sup3;/час</td>
+                </tr>
+                <tr>
+                    <td>Напор МПНУ</td>
+                    <td>{{Hgl}} </td>
+                    <td>м вод. ст.</td>
+                </tr>
+                <tr>
+                    <!--<td rowspan="3">&nbsp;</td>-->
+                    <td>Расход жокей-насоса</td>
+                    <td>{{Q_jok}}</td>
+                    <td>м&sup3;/час</td>
+                </tr>
+                <tr>
+                    <td>Гарантированный напор сети на входе МПНУ</td>
+                    <td>{{NPSH_a}}</td>
+                    <td>м вод. ст.</td>
+                </tr>
+                <tr>
+                    <td>Источник водоснабжения</td>
+                    <td colspan="2" style="text-align: center;">{{ISTOK}}</td>                    
+                </tr>
+
+                <tr>
+                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Предлагаемые параметры рабочей точки:</td>
+                </tr>
+                <tr>
+                    <!--<td rowspan="3">&nbsp;</td>-->
+                    <td>Расход МПНУ</td>
+                    <td>{{Q_f}} </td>
+                    <td>м&sup3;/час</td>
+                </tr>
+                <tr>
+                    <td class="charts" rowspan="9" style="max-height:200px">
+                        <img src="{{ chart_img_npsh }}" alt="График 2" style="width: 100%; height: auto">
+                    </td>
+                    <td>Напор МПНУ</td>
+                    <td>{{H_f}} </td>
+                    <td>м вод. ст.</td>
+                </tr>
+                <tr>
+
+                    <td>NPSH (не менее)</td>
+                    <td>{{NPSH_F}}</td>
+                    <td>м вод. ст.</td>
+
+                </tr>
+                <tr>
+
+                    <!--<td rowspan="7">&nbsp;</td>-->
+                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Данные МПНУ:</td>
+                </tr>
+                <tr>
+                    <td>Входной коллектор</td>
+                    <td>{{DN_in}}</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Выходной коллектор</td>
+                    <td>{{DN_out}}</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Напор жокей-насоса</td>
+                    <td>{{H_jok}} </td>
+                    <td>м вод. ст.</td>
+                </tr>
+                <tr>
+                    <td>Потребляемая мощность</td>
+                    <td>{{Power_f}} </td>
+                    <td>кВт</td>
+                </tr>
+                <tr>
+                    <td>Напряжение питания</td>
+                    <td>400</td>
+                    <td>В</td>
+                </tr>
+                <tr>
+                    <td>Масса насосных агрегатов</td>
+                    <td>{{mass}}</td>
+                    <td>кг</td>
+                </tr>
+                <!--<tr>-->
+                <!--<td>&nbsp;</td>-->
+                <!--<td>Масса МПНУ</td>
+        <td>-</td>
+        <td>кг</td>
+    </tr>-->
+                <tr style="height: 420px;">
+                    <td colspan="4" style="text-align: center;">
+                        <img src="{{img}}" alt="Изображение" style=" width: 100%; max-height: 410px; height: auto">
+                        <!--<img src="{{img}}" alt="График 2" style="height: 222px; width: 352px;">-->
+                        <!--<img src="{{ img }}" alt="Картинка">-->
+                        <!--{% load static %}
+            <img src="{% static img %}" alt="Изображение" style="height: 272px; width: 675px;">-->
+                    </td>
+
+                </tr>
+
+                <!--<tr>
+        <td class="razm" colspan="4" style="text-align: center; font-weight: bold; font-size: 18px;">Внимание! Представленные размеры могут незначительно отличаться от размеров итогового изделия!</td>
+    </tr>-->
+            </tbody>
+        </table>
+        <table class="main-table1" style="table-layout: fixed; width: 100%; border-collapse: collapse; margin-top: -1px; margin-right: 20px">
+            <colgroup>
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+            </colgroup>
+            <tbody style="text-align: center;">
+                <tr>
+                    <td>A</td>
+                    <td>B</td>
+                    <td>C</td>
+                    <td>D</td>
+                    <td>F</td>
+                </tr>
+                <tr>
+                    <td>{{A}}</td>
+                    <td>{{B}}</td>
+                    <td>{{C}}</td>
+                    <td>{{D}}</td>
+                    <td>{{F}}</td>
+                </tr>
+                <tr>
+                    <td class="razm" colspan="5" style="text-align: center; font-weight: bold; font-size: 17px;">Внимание! Представленные размеры могут незначительно отличаться от размеров итогового изделия!</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div style="page-break-after: always;"></div>           <!--разрыв страницы !!!!!!!!!!!!!-->
+
+     <div class="container Tabl-2-2" style="padding-right: 40px;">             
+        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">Гидравлическая схема</h1>
+        <img src="{{ img_gidr }}" alt="Изображение" style=" max-height: 600px; height: 590px; width: auto;">
+        <table class="table-gidr" style="width: 90% ; margin: 0 auto;">
+            <colgroup>
+                <col style="width: 20%;">
+                <col style="width: 80%;">
+
+                <!--<col style="width: 10%;">-->
+            </colgroup>
+            <tr style="font-weight: bold; font-size: 20px;">
+                <td>Обозначение</td>
+                <td>Наименование</td>
+
+            </tr>
+            <tr>
+                <td>DN1</td>
+                <td>Диаметр всасывающего коллектора (DN{{DN_in}})</td>
+
+            </tr>
+            <tr>
+                <td>DN2</td>
+                <td>Диаметр напорного коллектора (DN{{DN_out}})</td>
+
+            </tr>
+            <tr>
+                <td>H1; H2; H3</td>
+                <td>Основной(ые) + резервный насосы ({{nasos_name}})</td>
+
+            </tr>
+            {% if Q_jok != '-' %}
+            <tr>
+                <td>Н4</td>
+                <td>Жокей-насос</td>
+
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Зт (№) </td>
+                <td>Затвор дисковый</td>
+
+            </tr>
+            <tr>
+                <td>КО (№)</td>
+                <td>Клапан обратный</td>
+
+            </tr>
+            {% if ISTOK != 'Водопровод' %}
+            <tr>
+                <td>УКУ (№)</td>
+                <td>Устройство контроля уровня жидкости</td>
+
+            </tr>
+            {% endif %}
+            {% if Q_jok != '-' %}
+            <tr>
+                <td>Б (№)</td>
+                <td>Бак мембранный V=2*24л</td>
+
+            </tr>
+            {% endif %}
+            <tr>
+                <td>КШ (№)</td>
+                <td>Кран шаровый</td>
+
+            </tr>
+            {% if Q_jok != '-' %}
+            <tr>
+                <td>Ф (№)</td>
+                <td>Фильтр косой</td>
+
+            </tr>
+            {% endif %}
+            <tr>
+                <td>МН (№)</td>
+                <td>Манометр показывающий</td>
+
+            </tr>
+            <tr>
+                <td>КР (№)</td>
+                <td>Кран трехходовой</td>
+
+            </tr>
+            <tr>
+                <td>ПД (№)</td>
+                <td>Преобразователь давления</td>
+
+            </tr>
+        </table>
+        <!--<script>
+        const istokk = document.getElementById('istok').innerText.trim();
+        // Проверяем условие и скрываем строку, если нужно
+        if (istok === 'Водопровод') {
+            document.getElementById('uku').style.display = 'none';
+        }
+
+
+    </script>-->
+
+    </div>
+
+    <div style="page-break-after: always;"></div>
+    <div class="container Tabl-2-3" style="padding-right: 40px;">
+        <!--3 страница!!!!!!!!!!!!!!!!!!!-->
+        
+        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+            Приборы управления
+        </h1>
+        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+            Шкаф управления насосами ШУН
+        </h1>
+        <p style="margin-left: 30px; text-align: justify;">
+            Предназначен для управления насосами и отображение информации о состоянии насосной станции и обеспечивает:
+        </p>
+        <ul style="text-align: justify; margin-left: 30px; ">
+            <li>индикацию и контроль наличия напряжения на основном и резервном вводах электропитания, при пропадании напряжения на рабочем вводе - ШУН автоматически переключает питание на резервный ввод;</li>
+            <li>передачу информации о состоянии насосов шкафу управления и контроля ШУК по интерфейсной линии RS-485;</li>
+            <li>контроль интерфейсной линии связи ШУК - ШУН;</li>
+            <li>возможность автоматического и ручного управления насосами;</li>
+        </ul>
+        <h1 style="text-align: center;  font-size: 20px;">
+            Схема подключения ШУН
+        </h1>
+        <img src="{{ img_shun }}" alt="Изображение" style=" display: block; margin: 0 auto; width: auto; height: 810px; max-height: 820px; ">
+    </div>
+
+    <div style="page-break-after: always;"></div>
+    <div class="container Tabl-2-4" style="padding-right: 40px;">
+        <!--3 страница!!!!!!!!!!!!!!!!!!!-->
+        
+        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+            Шкаф управления и контроля ШУК
+        </h1>
+        <p style="margin-left: 30px; text-align: justify;">
+            Предназначен для управления автоматикой модульной пожарной насосной установки. Алгоритм работы шкафа обеспечивается программируемым логическим контроллером. Более подробная информация о работе ШУК представлена в руководстве по эксплуатации ДАЭ 100.436.100 РЭ (в комплекте).
+        </p>
+        <h1 style="text-align: center;  font-size: 20px;">
+            Схема подключения ШУК
+        </h1>
+        <img src="{{ img_shuk }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 675px; height: 456px; max-height: 456px;">
+        <img src="{{ img_shuk2 }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 663px; height: 320px; max-height:320px;">
+        <p style="margin-left: 30px; text-align: justify;">
+            Подключение дополнительных устройств к блоку А1, доступно к входам 1-9.
+        </p>
+    </div>
+
+    <div style="page-break-after: always;"></div>
+    <div class="container Tabl-2-5" style="padding-right: 40px;">
+        <!--3 страница!!!!!!!!!!!!!!!!!!!-->
+        
+        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+            Шкаф управления и сигнализации ШУС
+        </h1>
+        <p style="margin-left: 30px; text-align: justify;">
+            ШУС осуществляет включение звуковой и световой сигнализации:
+        </p>
+        <ul style="text-align: justify; margin-left: 30px; ">
+            <li>о пуске насосов;</li>
+            <li>о начале работы установки с указанием направлений, по которым подается огнетушащее вещество.</li>
+            <li>об отключении автоматического пуска насосов и установки;</li>
+            <li>о неисправности установки (исчезновение напряжения на рабочем и резервном вводах, давление воды на вводе ниже установленного, неисправности цепей электроуправления, об аварийном уровне в пожарном резервуаре, дренажном приямке, об отсутствии полного открытия задвижек (затворов) и т.д.</li>
+        </ul>
+        <h1 style="text-align: center;  font-size: 20px;">
+            Схема подключения ШУС
+        </h1>
+        <img src="{{ img_shus }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 677px; height: 532px; max-height: 532px; ">
+    </div>
+  
+    <div style="page-break-after: always;"></div>
+
+</body>
+
+</html>

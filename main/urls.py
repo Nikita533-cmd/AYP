@@ -6,7 +6,11 @@ from . import  views
 
 
 from .views import index
+from .views import ipa
+
 from .urls_api import api
+
+from .views import detector
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -18,7 +22,9 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path('', views.baseaup, name='baseaup'),
     path("ipa/", include("python.urls")),
+    # path("ipa/", views.ipa, name='ipa'),
     path("irrigation/", views.index, name='index'),
+    path("mpnu/", include("app.urls")),
 
 ]
 

@@ -1,0 +1,497 @@
+/*@font-face {
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/roboto/Roboto-Black.woff2") format('woff2');
+}*/
+/* @font-face { 
+    font-display: swap;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/roboto/Roboto-Black.woff2") format('woff2');
+} */
+
+header, footer { /* верхний-нижинй футоры*/
+    background: #0F1379;
+    height: 96px;
+    max-width: 1704px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 12px;
+}
+
+footer {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.d-flex { /*подкласс в футерах*/
+    display: flex;
+    align-items: center;
+    /*justify-content: flex-start;*/
+    color: white;
+    height: 100%;
+    padding: 0 20px;
+}
+.d-flex1 { /*подкласс в футерах*/
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.d-none, .d-none1 { /* найтройка расположенйи внутри шапки  */ /*надписи на нижней части веб страницы */
+    display: flex;
+    align-items: center;
+    /*justify-content: flex-end;*/
+    color: white;
+    height: 100%;
+    margin-left: auto;
+}
+
+.d-none {
+    padding: 0 30px;
+}
+
+.d-none1 {
+    padding: 0 20px;
+}
+
+.nav { /*область внутри шапки */
+    list-style-type: none; /* Убирает кружок */
+}
+
+.nav-link { /* номер телефона */
+    color: white;
+    text-decoration: none; /* Убирает подчеркивание */
+    font-size: 18px;
+}
+
+.nav-link2 { /* нижний футер */
+    color: white;
+    text-decoration: none; /* Убирает подчеркивание */
+    font-size: 14px;
+}
+
+body {
+    font-family: Roboto;
+    font-size: 14px;
+}
+
+/*НАСТРОЙКА ССЫЛКИ НА САЙТ (Главная)*/
+a.grey-dark {
+    color: #737796;
+    text-decoration: none;
+}
+
+.breadcrumb li.active {
+    color: #0F1379;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap; /* Если нужно, чтобы переносились на новую строку при нехватке места */
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    background: none;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "/";
+        margin: 0 8px;
+        color: #737796;
+    }
+/*..................................................................................................................................*/
+.wiget {
+    width: 40%;
+    /*max-width: 120px;*/ /* или нужная ширина */
+    height: auto;
+    padding: 0px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: right;
+    background-color: transparent;
+    /*border-color: #0F1379;*/
+}
+    .wiget:hover {
+        border: 2px solid #0F1379; /* более толстая рамка и нужный цвет */        
+    }
+    .wiget:focus {
+        outline: 1px solid #0F1379;
+        outline-offset: 0px;
+      
+    }
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: #0F1379;
+    max-width: 1704px;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    margin: 0px;
+    font-size: 22px;
+}
+
+.container {
+    padding: 0;
+    max-width: 1704px;
+    margin: 0 auto;
+}
+
+.container-gray {
+    background: #F3F2F8;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* растягиваем дочерние элементы по высоте */
+    max-width: 1704px;
+    margin: 0 auto;
+    border-radius: 30px;
+    gap: 20px; /* промежуток между колонками */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#jok_bool, #All, #MasDaf, #Lubi, #CNP, #Hydroo, #Other {
+    margin-left: auto; /* отодвинет чекбокс максимально вправо */
+    width: 18px; /* ширина чекбокса */
+    height: 18px; /* высота чекбокса */
+    cursor: pointer; /* курсор при наведении */
+    accent-color: #0F1379;
+}
+
+.container.Form-TY3, .TY-Text1 {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1704px;
+    border-radius: 30px;
+    width: 50%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+}
+
+.container.Form-TY3 {
+    padding: 20px;
+    padding-top: 5px;
+    margin-bottom: 30px;
+}
+
+.TY-Text1 {
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    align-items: center;
+    padding: 20px;
+    padding-top: 5px;
+    margin-bottom: 30px;
+}
+
+.Tex-opis {
+    font-size: 18px;
+    font-weight: 500;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    /*align-items: stretch;*/
+    align-items: flex-start;
+    max-width: 1704px;
+    /*margin: 0 auto;*/
+    border-radius: 30px;
+    gap: 20px; /* Добавьте промежуток между колонками */
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.Glavi1, .Glavi2 {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1704px;
+    border-radius: 30px;
+    padding: 0;
+    padding-top: 5px;
+    width: 100%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+}
+
+.param-texopis {
+    margin-top: 28px;
+}
+
+.param-texopis, .gabarit, .tex-param {
+    font-size: 18px;
+    font-weight: 500;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /*align-items: stretch;*/
+    align-items: flex-start;
+    max-width: 1704px;
+    /*margin: 0 auto;*/
+    width: 100%;
+    border-radius: 30px;
+    justify-content: space-between;
+    padding: 10px;
+    /*padding-top: 1px;*/
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.texn-param, .gab-param, .pred-param {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    background: #FFFFFF;
+    border-collapse: collapse;
+}
+
+    .texn-param td, .gab-param td, .pred-param td, .texn-param tr, .gab-param tr, .pred-param tr {
+        border-bottom: 1px solid #ccc;
+        vertical-align: middle; /* Вертикальное центрирование */
+    }
+.tab_prod {
+    font-size: 18px;
+    font-weight: 500;
+    background: #FFFFFF;
+    border-collapse: collapse;
+}
+.pred-param2 {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    background: #FFFFFF;
+    border-collapse: collapse;
+    /*border: 1px solid #ccc;*/
+}
+
+    .pred-param2 td, .pred-param2 tr {
+        border-bottom: 1px solid #ccc;
+        padding: 5px 10px;
+    }
+
+.left-cell {
+    border: none;
+    text-align: left;
+    padding: 8px 0px;
+    vertical-align: middle; /* Вертикальное центрирование */
+}
+
+.right-cell {
+    text-align: right;
+    padding: 8px 20px;
+    vertical-align: middle; /* Вертикальное центрирование */
+    border: none
+}
+
+#form1 {
+    display: flex;
+    flex-direction: column;
+    /*grid-template-columns: 1fr 1fr;*/
+    gap: 10px;
+    align-items: center;
+    background: #FFFFFF;
+    max-width: 1704px;
+    border-radius: 30px;
+    width: 100%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+}
+
+.form-row {
+    display: contents;
+}
+
+/*.label1, .label2, .label3 {
+    flex-direction: column;
+    background: #FFFFFF;
+    align-items: flex-start;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    width: auto;
+}
+
+.vel1, .vel2, .vel3 {
+    flex-direction: column;
+    background: #FFFFFF;
+    align-items: flex-end;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 700;
+    padding-right: 20px;
+    margin: 0;
+    width: auto;
+}
+*/
+.form-label {
+    text-align: left; /* выравниваем текст label по левому краю */
+    font-size: 18px;
+    font-weight: 500;
+    width: 100%;
+}
+
+label[for="DN_out_sp"],
+label[for="DN_in_sp"] {
+    display: none;
+}
+
+#Q, #H, #istochik, #DN_in, #DN_out, #Q_jok, #H_jok, #IST_V, #IST_H {
+    height: 30px;
+    width: 100%;
+    font-size: 18px;
+    /*font-weight: 700;*/
+    text-align: right;
+    border-radius: 6px;
+    margin-left: auto;
+}
+
+#jokey_fields_container {
+    display: none;
+}
+
+#TY3 {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1704px;
+    border-radius: 30px;
+    width: 100%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none; /* Класс для скрытия видимости , до нажатия кнопки подобрать  */
+}
+
+#pump-select, #b1, #b2, #sort_id, #close, #list {
+    background-color: #0F1379;
+    border-color: #0F1379;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 8px; /* Закругление углов */
+    padding: 10px 15px;
+    cursor: default; /* курсор по умолчанию */
+}
+
+    #pump-select:hover, #b1:hover, #b2:hover, #sort_id:hover, #close:hover, #list:hover {
+        cursor: pointer; /* курсор "рука" при наведении */
+    }
+
+#pump-select {
+    width: 90%
+}
+
+#TY1 {
+    /*margin-top: 20px;*/
+    height: auto;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 30px;
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center;
+}
+
+.fit-picture {
+    margin-left: 20px;
+    height: auto;
+    width: calc(100% - 40px);
+    background: #F3F2F8;
+    border-radius: 30px;
+}
+
+#TY {
+    margin-top: 20px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1704px;
+    border-radius: 30px;
+    width: 100%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+    justify-content: center; /* Горизонтальное центрирование */
+}
+
+#Text1 {
+    font-family: Roboto;
+    font-weight: 500;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1704px;
+    border-radius: 30px;
+    /*margin-top: 30px;*/
+    width: 100%; /* Занимает половину ширины container-gray */
+    box-sizing: border-box; /* Включаем padding и border в ширину */
+}
+
+@media (max-width: 999px) {
+    .container-gray, .Tex-opis {
+        flex-direction: column; /* Перестраиваем в колонку */
+    }
+
+    .container.Form-TY3, .TY-Text1, #pump-select, #TY {
+        width: 100%
+    }
+
+    .param-texopis {
+        margin: 0;
+    }
+
+    #okno {
+        flex-direction: column;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 650px) {
+    .nav {
+        display: none;
+    }
+}
+@media (max-width: 520px) {
+    .tab_prod {
+        padding: 0px;
+        margin-left: -10px;
+        font-size: 14px;
+        font-weight: 500;
+        background: #FFFFFF;
+        border-collapse: collapse;
+    }
+}
+@media (max-width: 433px) {
+    .logo {
+    width: 100%;
+    height: 100%;
+    }
+}

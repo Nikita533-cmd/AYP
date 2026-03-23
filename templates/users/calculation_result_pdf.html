@@ -31,7 +31,7 @@
 
         .up_kolontitul td {
             border: none;
-            font-size: 15px;
+            font-size: 12px;
         }
 
         #logo-down {
@@ -113,12 +113,12 @@
             font-weight: bold;
         }
 
-        .meta-info {
+        /* .meta-info {
             font-size: 9pt;
             margin-bottom: 20px;
             text-align: right;
             color: #666;
-        }
+        } */
 
         table {
             width: 100%;
@@ -129,7 +129,8 @@
         }
 
         table th {
-            background-color: #e0e0e0;
+            background-color: white;
+            /* background-color: #e0e0e0; */
             border: 1px solid #000;
             padding: 6px 4px;
             text-align: center;
@@ -157,9 +158,9 @@
             width: 20%;
         }
 
-        table tbody tr:nth-child(even) {
+        /* table tbody tr:nth-child(even) {
             background-color: #f5f5f5;
-        }
+        } */
 
         .section {
             margin-bottom: 20px;
@@ -167,9 +168,9 @@
         }
 
         .param-box {
-            padding: 8px;
+            /* padding: 8px;
             background-color: #f0f0f0;
-            border: 1px solid #ccc;
+            border: 1px solid #ccc; */
             margin-bottom: 10px;
         }
 
@@ -185,7 +186,7 @@
         }
 
         .connection-header {
-            background-color: #fff2cc;
+            /* background-color: #fff2cc; */
             padding: 6px;
             margin-top: 10px;
             font-weight: bold;
@@ -274,7 +275,7 @@
                 <tr>
                     <td style="width: 30%;">ОКПО 03701001</td>
                     <td style="width: 30%;">ул. Лесная, 10, г.Бийск</td>
-                    <td style="width: 30%;">sa-biysk.ru   sales@sa-bisk.ru</td>
+                    <td style="width: 30%;">sa-biysk.ru   sales@sa-biysk.ru</td>
                     <td style="width: 10%;"></td>
                 </tr>
                 <tr>
@@ -487,7 +488,12 @@
         {% if result.data.connections %}
         <h3 class="mt-10">Участки между ветвями</h3>
         {% for connection_key, connection_data in result.data.connections.items %}
-        <div class="connection-header">{{ connection_key }}</div>
+
+        {% if connection_key == "feed-pipe" %}
+        <div class="connection-header">Итоговая характеристика ветвей</div>
+        {% else %}
+        <div class="connection-header">Ветвь - {{ connection_key }}</div>
+        {% endif %}
 
         {% if connection_data %}
         <table class="params-table">
@@ -556,32 +562,65 @@
         <h2>6. Требуемые гидравлические параметры</h2>
 
         <table class="params-table">
+            
             <tr>
-                <td>Требуемый расход</td>
+                <td>Давление на входе насоса</td>
                 <td>
-                    {% if result.data.feedPipe.results.Q_total %}
-                        {{ result.data.feedPipe.results.Q_total|floatformat:2 }}
-                    {% else %}-{% endif %}
+                    {{ result.data.inlet_pressure_value|floatformat:2|default:"-" }}
                 </td>
-                <td>л/с</td>
+                <td>МПа</td>
             </tr>
             <tr>
-                <td>Требуемый напор</td>
+                <td>Геометрическая высота (Z = H/100)</td>
                 <td>
-                    {% if result.data.feedPipe.results.P_total %}
-                        {{ result.data.feedPipe.results.P_total|floatformat:2 }}
+                    {{ result.data.Z|floatformat:2|default:"-" }}
+                </td>
+                <td>м вод. ст.</td>
+            </tr>
+            <tr>
+                <td>Давление у диктующего оросителя</td>
+                <td>
+                    {% if result.data.Pd %}
+                        {{ result.data.Pd|floatformat:2 }}
+                    {% else %}-{% endif %}
+                </td>
+                <td>МПа</td>
+            </tr>
+            <tr>
+                <td>Потери давления в трубопроводах</td>
+                <td>
+                    {% if result.data.totalPipeLosses %}
+                        {{ result.data.totalPipeLosses|floatformat:2 }}
                     {% else %}-{% endif %}
                 </td>
                 <td>м вод. ст.</td>
             </tr>
             <tr>
-                <td>Общие потери давления</td>
+                <td>Местные сопротивления (20% от потерь в трубах)</td>
                 <td>
-                    {% if result.data.totalLosses %}
-                        {{ result.data.totalLosses|floatformat:2 }}
+                    {% if result.data.localLosses %}
+                        {{ result.data.localLosses|floatformat:2 }}
                     {% else %}-{% endif %}
                 </td>
                 <td>м вод. ст.</td>
+            </tr>
+            <tr>
+                <td>Требуемый расход насоса</td>
+                <td>
+                    {% if result.data.requiredFlow %}
+                        {{ result.data.requiredFlow|floatformat:2 }}
+                    {% else %}-{% endif %}
+                </td>
+                <td>м³/ч</td>
+            </tr>
+            <tr>
+                <td>Требуемый напор насоса</td>
+                <td>
+                    {% if result.data.requiredPressure %}
+                        {{ result.data.requiredPressure|floatformat:2 }}
+                    {% else %}-{% endif %}
+                </td>
+                <td>МПа</td>
             </tr>
         </table>
     </div>

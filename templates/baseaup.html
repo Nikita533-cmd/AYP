@@ -3,7 +3,7 @@
 {% block title %}Онлайн конфигуратор расчета автоматических установок пожаротушения (АУП){% endblock %}
 
 {% block content %}
-<div class="container my-4">
+<!-- <div class="container my-4">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -15,15 +15,15 @@
       <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
     </ol>
   </nav>
-</div>
+</div> -->
 <div class="container container-general" style="display: flex; flex-direction: column; width: 100%; border-radius: 30px; background-color: #F3F2F8; padding-left: 40px; padding-right: 40px;">
     <!-- подбор МПНУ! -->
     <article style="margin-bottom: 40px; margin-top: 40px;">
-        <a class="article1" href="https://station.sa-biysk.ru/" target="_blank">
+        <a class="article1" href="mpnu/" >
             <div class="container module">            
                 <img class="image1" width="auto" height="300px" src="/static/images/mpnu.jpg" alt="МПНУ">
                 <h5>
-                    Кофнигуратор служит для подбора модульной пожарной насосной установки в зависимости от заданных параметров.
+                    Конфигуратор служит для подбора модульной пожарной насосной установки в зависимости от заданных параметров.
                 </h5>                                   
             </div>
         </a>
@@ -31,9 +31,11 @@
     </article>
 <!-- расчет воздушных установок -->
      <article style="margin-bottom: 40px;">
-        <a class="article1" href="https://sa-biysk.ru/calc/" target="_blank">
+        <a class="article1" href="https://sa-biysk.ru/calc/" >
             <div class="container module">            
                 <img class="image1" width="auto" height="300px" src="/static/images/air.jpg" alt="air">
+                
+                <!-- <img class="image1" width="auto" height="300px" src="/static/images/gifka.gif" alt="air"> -->
                 <h5>
                     Расчет и определение оптимального состава спринклерных воздушных установок пожаротушения.
                 </h5>                                  
@@ -43,7 +45,7 @@
     </article>
 <!-- калькулятор подбора оросителей -->
      <article style="margin-bottom: 40px; ">
-        <a class="article1" href="irrigation/" target="_blank">
+        <a class="article1" href="irrigation/" >
             <div class="container module">            
                 <img class="image1" width="auto" height="300px" src="/static/images/orositel.jpg" alt="orositel">
                 <h5>
@@ -55,9 +57,25 @@
     </article>
 <!-- калькулятор подбора диаметров отверстий аспирационной системы ИПА -->
      <article style="margin-bottom: 40px; ">
-        <a class="article1" href="ipa/" target="_blank">
-            <div class="container module">
-                <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa">
+        <a class="article1" >
+        <!-- <a class="article1" href="ipa/" >    -->
+            <!-- <div class="container module">
+                <div class="viewer-container"> -->
+                <!-- <h2 style="color: #333; margin-bottom: 15px;">ДАЭ 100.414.000 СБ</h2> -->
+                <!-- <canvas id="renderCanvas"></canvas>
+                <p style="color: #666; margin-top: 10px; font-size: 14px;">
+                    ЛКМ+drag: вращение | Колёсико: зум
+                </p>
+            </div> -->
+                
+                <div id="viewer" style="width:400px;height:300px;border:1px solid #ccc;"></div>              
+
+
+                <!-- <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa"> -->
+                <!-- <video class="image1" width="auto" height="300px" muted loop autoplay playsinline preload="metadata" poster="/static/images/air.jpg">
+                    <source src="/static/images/test.mp4" type="video/mp4">
+                     Ваш браузер не поддерживает видео.
+                 </video> -->
                 <h5>
                     Калькулятор служит подбора диаметров отверстий аспирационной системы.
                 </h5>                                   
@@ -67,17 +85,199 @@
     </article>
 <!-- калькулятор АУП -->
      <article style="margin-bottom: 40px; ">
-        <a class="article1" href="ayp/" target="_blank">
+        <a class="article1" href="ayp/">
             <div class="container module">            
                 <img class="image1" width="auto" height="300px" src="/static/images/aup.jpg" alt="МПНУ">
                 <h5>
-                    Кофнигуратор служит для расчета АУП.
+                    Конфигуратор служит для расчета АУП.
                 </h5>                       
             </div>
         </a>                
     </article>    
 
 </div>
+
+<script>
+   $(function(){
+    // Массив из 7 ваших изображений (полные пути)
+    
+      var frames = [];
+    var frames = [];
+        for (var i = 1; i <= 600; i++) {
+        frames.push("/static/images/ipa/ipa" + i + ".jpg");
+    }
+    
+    $("#viewer").spritespin({
+        width: 1000,
+        height: 800,
+        frames: frames.length,  // 7
+        behavior: "drag",
+        sense: 0.5,
+        source: frames,         // Массив готов
+        loop: true,
+        animate: true
+    });
+});
+
+</script>
+
+
+<!-- <script>
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas, true);
+        
+        const createScene = function() {
+            const scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
+            
+            // ДИНАМИЧЕСКАЯ КАМЕРА
+            const camera = new BABYLON.ArcRotateCamera(
+                "camera", 
+                Math.PI / 2, 
+                Math.PI / 3, 
+                1, 
+                BABYLON.Vector3.Zero(), 
+                scene
+            );
+            
+            // МАГНИТНЫЙ minZ
+            const updateCameraLimits = () => {
+                const radius = camera.radius;
+                camera.minZ = Math.max(0.005, radius * 0.05);
+                camera.lowerRadiusLimit = Math.max(0.15, radius * 0.15);
+            };
+            
+            camera.wheelPrecision = 25;
+            camera.upperRadiusLimit = 100;
+            camera.pinchPrecision = 25;
+            camera.attachControl(canvas, true);
+            
+            scene.registerBeforeRender(() => {
+                updateCameraLimits();
+                camera.alpha += 0.003;
+            });
+            
+            // Свет
+            //new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(1, 1, 1), scene);
+
+            // ✅ ИСПРАВЛЕННЫЙ СВЕТ (яркий + реалистичный)
+            const hemiLight = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
+            hemiLight.intensity = 0.6;    // Было 0.8 → 0.4 (50%)
+            hemiLight.diffuse = new BABYLON.Color3(0.9, 0.9, 0.95);  // Немного приглушить
+
+            const sunLight = new BABYLON.DirectionalLight("sun", new BABYLON.Vector3(-2, -3, 1), scene);
+            sunLight.intensity = 0.6;     // Было 1.2 → 0.6 (50%)
+
+            
+            // ✅ ФУНКЦИЯ ЛСК (ваш код с сайта)
+            function localAxes(size) {
+                var pilot_local_axisX = BABYLON.Mesh.CreateLines("pilot_local_axisX", [
+                    new BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), 
+                    new BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
+                    new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
+                ], scene);
+                pilot_local_axisX.color = new BABYLON.Color3(1, 0, 0);
+                
+                var pilot_local_axisY = BABYLON.Mesh.CreateLines("pilot_local_axisY", [
+                    new BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), 
+                    new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
+                    new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
+                ], scene);
+                pilot_local_axisY.color = new BABYLON.Color3(0, 1, 0);
+                
+                var pilot_local_axisZ = BABYLON.Mesh.CreateLines("pilot_local_axisZ", [
+                    new BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), 
+                    new BABYLON.Vector3(0, -0.05 * size, size * 0.95),
+                    new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
+                ], scene);
+                pilot_local_axisZ.color = new BABYLON.Color3(0, 0, 1);
+                
+                var local_origin = BABYLON.MeshBuilder.CreateBox("local_origin", { size: 0.1 }, scene);
+                local_origin.isVisible = false;
+                
+                pilot_local_axisX.parent = local_origin;
+                pilot_local_axisY.parent = local_origin;
+                pilot_local_axisZ.parent = local_origin;
+                
+                return local_origin;
+            }
+            
+            // Модель + АВТОПОДГОНКА + ЛСК
+            BABYLON.SceneLoader.Append("", "/static/images/ДАЭ 100.414.000 СБ.gltf", scene, function() {
+                console.log("✅ Модель загружена!");
+                
+                setTimeout(() => {
+                    const bbox = scene.getBoundingBox();
+                    const modelSize = bbox.maximumWorld.subtract(bbox.minimumWorld).length();
+                    
+                    // 🎯 НАЙТИ КОРЕНЬ МОДЕЛИ
+                    const rootMesh = scene.rootNodes[0] || scene.meshes.find(m => m.name === "__root__") || scene.meshes[0];
+                    if (rootMesh) {
+                        rootMesh.position = BABYLON.Vector3.Zero();
+                        
+                        // 🔄 ПОВОРОТ ОТНОСИТЕЛЬНО ЛСК
+                        rootMesh.rotationQuaternion = null;
+                        rootMesh.rotation = new BABYLON.Vector3(
+                            Math.PI / 4,    // 🔴 45° вокруг X ЛСК
+                            0,              // 🟢 0° Y
+                            0               // 🔵 0° Z
+                        );
+                    }
+                    
+                    // 📷 Камера
+                    camera.radius = modelSize * 1.5;
+                    camera.setTarget(BABYLON.Vector3.Zero());
+                    
+                    // 🔥 ОПТИМИЗАЦИЯ + ЯРКИЕ ЦВЕТА + БЕЗ РЕБЕР
+                    scene.meshes.forEach(mesh => {
+                        // ❌ Убрать ребра
+                        mesh.showWireframeEdges = false;
+                        if (mesh.material) {
+                            mesh.material.wireframe = false;
+                        }
+                        
+                        // 🎨 ЯРКИЕ МАТЕРИАЛЫ
+                        if (mesh.material) {
+                            // PBR (GLB часто использует)
+                            if (mesh.material.getClassName() === "PBRMaterial") {
+                                const pbr = mesh.material;
+                                pbr.environmentIntensity = 1.0;
+                                pbr.roughness = 0.3;
+                                pbr.albedoColor.scaleInPlace(1.2);  // +20% яркости
+                                pbr.emissiveIntensity = 0.1;
+                            }
+                            
+                            // StandardMaterial
+                            if (mesh.material.getClassName() === "StandardMaterial") {
+                                mesh.material.intensity = 1.2;
+                                mesh.material.specularColor = new BABYLON.Color3(0.8, 0.8, 0.8);
+                            }
+                            
+                            mesh.material.backFaceCulling = true;
+                        }
+                        
+                        mesh.checkCollisions = false;
+                    });
+                    
+                    // 🎯 ЛСК в центре модели
+                    const lcsSize = modelSize * 0.01;
+                    const lcs = localAxes(lcsSize);
+                    lcs.position = BABYLON.Vector3.Zero();
+                    
+                    console.log("🎨 Модель оптимизирована: яркие цвета + без ребер!");
+                }, 500);
+            });
+
+            
+            return scene;
+        }
+        
+        const scene = createScene();
+        engine.runRenderLoop(() => scene.render());
+        window.addEventListener("resize", () => engine.resize());
+    </script> -->
+
+
     
 <style>
     .container.module {
@@ -91,7 +291,7 @@
         align-items: center;
 }
 
-a {
+a.article1 {
     text-decoration: none;  
     font-size: 20px;  
     color: #0F1379;
@@ -101,3 +301,4 @@ a {
 </style>
 
 {% endblock %}
+ 

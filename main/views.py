@@ -4,7 +4,10 @@ from tubes.models import TubeType
 
 
 def index(request):
-    return render(request, "index.html", {})
+    return render(request, "index.html", {"view": "index"})
+
+def ipa(request):
+    return render(request, "ipa.html", {})    
 
 
 def new_view(request):
@@ -20,3 +23,6 @@ def editor_view(request):
 
 def baseaup (request):
     return render (request, 'baseaup.html')
+
+def detector(request):
+    return render(request, "detector.html", {})

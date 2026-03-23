@@ -33,6 +33,11 @@ document.addEventListener("DOMContentLoaded", function() {
     calculate(is_form_submited)
   }))
 
+
+
+  // test: "rtter",
+
+
   function calculate(show_results){
     const 
       data = new FormData(form),
@@ -309,6 +314,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const kt_values = {} // Хранение kt для каждой ветви
   const connection_kt_values = {} // Хранение kt для каждого соединения
   const branch_results = {} // Хранение результатов расчёта для каждой ветви
+  const pump_results = {} // Хранение результатов расчёта для подбора МПНУ
   const branchCalculateFunctions = {} // Хранение функций расчета для каждой ветви
   const connectionCalculateFunctions = {} // Хранение функций расчета соединений
   let branchCounter = 3 // Начинаем с 3, так как уже есть 3 ветви
@@ -450,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <th style="width: 100px" class="text-center">Действия</th>
         </thead>
         <tbody>
-          ${[1,2,3,4,5].map(i => `
+          ${[1,2].map(i => `
             <tr data-num="${i}" data-type="sprinkler" class="sprinkler-row">
               <td nowrap>Ороситель ${i}${getBranchLetter(branchNum).toLowerCase()}</td>
               <td class="text-center">-</td>
@@ -1057,6 +1063,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // объявление переменных для передачи в pdf и МПНУ
+
+  let Pd = 0 ;      // давление у диктующего орсоителЯ
+  let Z = 0 ;     // Геометрическая высота в МПа (H в метрах / 100)
+  let totalPipeLosses = 0 ;  ////Вычисляем суммарные потери в трубопроводах   // (разница между максимальным давлением и начальным давлением у диктующего оросителя)
+  let localLosses = 0 ;  // Местные сопротивления (20% от линейных потерь)
+  let requiredPressure =0;  // Требуемый напор насоса: Pн = Pд + Z + ΣΔP + Pм - Pвх
+  let requiredFlow =0; //// перевод в м3.час
+
   function initBranch(branchNum) {
     const
       TubeType = document.getElementById(`TubeType-${branchNum}`),
@@ -1099,6 +1114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         KTValue.innerHTML = ""
       }
     })
+    
 
     // Функция расчёта требуемых параметров насоса
     function calculatePumpRequirements() {
@@ -1110,7 +1126,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Находим максимальные значения P и Q среди всех ветвей
       let maxP = 0
       let maxQ = 0
-      let totalPipeLosses = 0
+      // let totalPipeLosses = 0
 
       for (const branchNum in branch_results) {
         const result = branch_results[branchNum]
@@ -1129,13 +1145,13 @@ document.addEventListener("DOMContentLoaded", function() {
       // Геометрическая высота в МПа (H в метрах / 100)
       const heightInput = document.getElementById('sklad_height') || document.getElementById('height-input')
       const H = parseFloat(heightInput?.value) || 0
-      const Z = H / 100 // МПа
+      Z = H / 100 // МПа
 
       // Местные сопротивления (20% от линейных потерь)
-      const localLosses = totalPipeLosses * 0.20
+      localLosses = totalPipeLosses * 0.20
 
       // Давление у диктующего оросителя в МПа
-      const Pd = pwork_meter_value / 100 // конвертируем из метров в МПа
+      Pd = pwork_meter_value / 100 // конвертируем из метров в МПа
 
       // Потери в трубопроводах в МПа
       const pipeLossesMPa = totalPipeLosses / 100
@@ -1144,13 +1160,13 @@ document.addEventListener("DOMContentLoaded", function() {
       const localLossesMPa = localLosses / 100
 
       // Требуемый напор насоса: Pн = Pд + Z + ΣΔP + Pм - Pвх
-      const requiredPressure = Pd + Z + pipeLossesMPa + localLossesMPa - inlet_pressure_value
+      requiredPressure = Pd + Z + pipeLossesMPa + localLossesMPa - inlet_pressure_value
 
       // Требуемый напор в метрах
       const requiredPressureMeters = requiredPressure * 100
 
       // Требуемый расход в м³/ч (конвертируем из л/с)
-      const requiredFlow = (maxQ * 3.6).toFixed(2) // л/с * 3.6 = м³/ч
+      requiredFlow = (maxQ * 3.6).toFixed(2) // л/с * 3.6 = м³/ч
 
       // Отображаем результаты
       document.getElementById('required-pressure').innerHTML = `${requiredPressureMeters.toFixed(2)} м`
@@ -1166,6 +1182,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Показываем блок с результатами
       document.getElementById('pump-results-block').style.display = 'block'
+
+      // return {
+        
+      //   localLosses
+
+      // }
+
+      // pump_results = {
+      //   localLosses
+      // }
+      //  = "gffg"tutu
+      return Pd,
+      Z,
+      totalPipeLosses,
+      localLosses,
+      requiredPressure,
+      requiredFlow
+
+
     }
 
     // расчёт параметров ветви //
@@ -1368,6 +1403,15 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteBranch(branchNum)
       })
     }
+    // return {
+    //   localLosses : calculatePumpRequirements().localLosses
+    // }
+    return Pd,
+      Z,
+      totalPipeLosses,
+      localLosses,
+      requiredPressure,
+      requiredFlow
   }
 
   // Функция создания начальных ветвей
@@ -1862,6 +1906,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     return branchDetails
   }
+  
 
   // Функция сбора всех данных расчета
   function collectCalculationData() {
@@ -1941,13 +1986,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const pipeDN = pipeDiameterSelect?.options[pipeDiameterSelect.selectedIndex]?.text || null
 
     // Вычисляем общие потери (если есть данные)
-    let totalLosses = null
-    if (branch_results['feed-pipe']?.P_total) {
-      totalLosses = branch_results['feed-pipe'].P_total
-    }
+    // let totalLosses = null
+    // // let P_loss = window.calculateFeedPipe();
+    // if (branch_results['feed-pipe']?.P_total) {
+    //   // totalLosses = P_loss   }
+    //   // totalLosses = branch_results['feed-pipe'].P_total - pwork_meter_value}
+    //   totalLosses = branch_results['feed-pipe'].P_total - pwork_meter_value}
 
+
+    // const localLosses = initBranch("feed-pipe").localLosses;
+
+    // const pump_results = {
+    //   localLosses: calculatePump.localLosses 
+    // }
+
+    
     return {
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString(),  
       formValues,
       installationType,
       branches,
@@ -1965,9 +2020,18 @@ document.addEventListener("DOMContentLoaded", function() {
       sprinklerChartImage,
       pipeType,
       pipeDN,
-      totalLosses,
+      // ttrrrt : "fddffd",
+      // totalLosses,
       kt_values,
-      branch_results
+      branch_results,
+      Pd,       // Давление у диктующего оросителя в МПа
+      Z,         // Геометрическая высота в МПа (H в метрах / 100)
+      totalPipeLosses,      // Вычисляем суммарные потери в трубопроводах
+      // (разница между максимальным давлением и начальным давлением у диктующего оросителя)
+      localLosses,     // Местные сопротивления (20% от линейных потерь)
+      requiredPressure,     // Требуемый напор насоса: Pн = Pд + Z + ΣΔP + Pм - Pвх
+      inlet_pressure_value, ///////// входное давление перед пожарного насосом 
+      requiredFlow
     }
   }
 
@@ -1989,6 +2053,7 @@ document.addEventListener("DOMContentLoaded", function() {
       try {
         // Собираем все данные
         const calculationData = collectCalculationData()
+        
 
         // Отправляем на сервер
         const response = await fetch('/users/save-calculation/', {

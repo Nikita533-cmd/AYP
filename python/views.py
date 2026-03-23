@@ -38,8 +38,8 @@ class OtvView(ListView):
         return context
 
 
-def home(request):
-    return render(request, "python/layout.html")
+# def home(request):
+#     return render(request, "python/layout.html")
 
 
 def Ploshad (vetk, qnty, s):
@@ -51,7 +51,9 @@ def Ploshad (vetk, qnty, s):
     
     return ss
         
-    
+
+def ipa(request):
+    return render(request, "ipa.html", {})        
 
 
 def generate_pdf(request):
@@ -60,7 +62,7 @@ def generate_pdf(request):
         # Получаем данные из формы или контекста
 
         # Рендерим HTML шаблон
-        html_string = render_to_string("python/pdf_template.html")
+        html_string = render_to_string("users/ipa_pdf.html")
         pdf = HTML(string=html_string).write_pdf()
         response = HttpResponse(pdf, content_type="application/pdf")
         response["Content-Disposition"] = 'attachment; filename="your_file.pdf"'
@@ -89,6 +91,7 @@ def generate_pdf(request):
 
 def get_csrf_token(request):
     """Endpoint для получения CSRF токена"""
+    print(get_token(request))
     return JsonResponse({"csrfToken": get_token(request)})
     
 def check_static_file_exists(relative_path):
@@ -259,18 +262,19 @@ def ajax_button_handler(request):
                 "message_list_B": last_itemB,
                 "message_list_A": last_itemA,
                 "correct_path":correct_path,
-                "dt": current_datetime.strftime("%d.%m.%Y %H:%M:%S"),
+                "dt": current_datetime.strftime("%d.%m.%Y"),
+                # "dt": current_datetime.strftime("%d.%m.%Y %H:%M:%S"),
                 "ploshad": round(plosh, 2),
                 "vb":v+db,
             }
-            html_string = render_to_string("python/resolution.html", contxt)
+            html_string = render_to_string("ipa_resolution.html", contxt)
 
             if button_name == "submit":
 
                 response_data = {"status": "success", "message": html_string}
 
             elif button_name == "getpdf":
-                html_string = render_to_string("python/pdf_template.html", contxt)
+                html_string = render_to_string("users/ipa_pdf.html", contxt)
                 
                 pdf = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf()
                 response = HttpResponse(pdf, content_type="application/pdf")

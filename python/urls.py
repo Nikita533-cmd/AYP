@@ -13,7 +13,8 @@ home_list_otv_view = views.OtvView.as_view(
 
 
 urlpatterns = [
-    path("", views.home , name="home"),
+    path("", views.ipa , name="home"),
+    # path('ajax-handler/', views.ajax_button_handler, name='ajax_handler'),
     path('ajax-handler/', views.ajax_button_handler, name='ajax_handler'),
     path('api/csrf-token/', views.get_csrf_token, name='get_csrf_token'),
     path('generate-pdf/', views.generate_pdf, name='generate_pdf'),

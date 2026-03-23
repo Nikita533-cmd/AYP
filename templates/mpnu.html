@@ -1,0 +1,1122 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet"  href="{% static 'css/mpnu.css' %}"/>
+    <!-- <meta name="yandex-verification" content="4e2eb811e2539718" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"> -->
+    <title>Подбор модульной пожарной насосной установки</title>
+    <!-- <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="калькулятор, конфигуратор, подбор станции пожаротушения, автоматический подбор МПНУ, насосная станция пожаротушения, пожарная установка, насосная установка пожаротушения, водяные насосные станции, модульные насосные станции, Спецавтоматика" /> 
+    <meta name="description" content="Подбор насосной станции пожаротушения от компании Спецавтоматика г. Бийск. Техническое сопровождение на всём жизненном цикле." />
+
+    <link rel="stylesheet" type="text/css" href='/static/app/content/styles2.css' />
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" />
+
+    <link href="styles2.css" rel="stylesheet">--> 
+    <!-- <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.cookie = "my_cookie=new_value; path=/; max-age=3600";
+        });
+    </script> -->
+
+</head>
+<body>
+    <!-- Yandex.Metrika counter -->
+<!-- <script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(29995129, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/29995129" style="position:absolute; left:-9999px;" alt="" /></div></noscript> -->
+<!-- /Yandex.Metrika counter -->
+
+    
+    <!-- <header id="Head">
+        <div class="d-flex flex-wrap align-items-center justify-content-start" style="height: 100%;">
+            <a href="https://sa-biysk.ru/" class="logo_up align-items-center me-lg-auto" style="justify-content: flex-start;"> -->
+            <!--<a href="https://sa-biysk.ru/" class="logo_up align-items-center me-lg-auto" style="height: 90%; justify-content: flex-start;">-->
+    
+                <!-- <img src="{% static 'app/img/logo.svg' %}" role="img" aria-label="Спецавтоматика" class="logo" style=" justify-content: flex-start;" />
+            </a>
+            <div class="d-none d-sm-block me-4">
+    
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+    
+                    <li>
+                        <a href="tel:8-800-2008-208" class="nav-link text-white">8-800-2008-208</a> 8-800-2008-208
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>  -->
+    <!-- <div class="container my-4">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="https://sa-biysk.ru/" class="grey-dark">
+                        <img src='/static/app/img/home.png' style="margin-bottom: -1px;" />
+                        Главная
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Калькуляторы</li>
+            </ol>
+        </nav>
+    </div> -->
+    <h1>Подбор модульной пожарной насосной установки (МПНУ)</h1>
+    <div class="container container-gray" style="min-height: 10px;">
+        <div class="container Form-TY3" style="min-height: 10px;">
+            <h2>Запрашиваемые параметры</h2>
+            <form method="post" id="form1">
+                {% csrf_token %}
+
+                <input type="hidden" name="which_form_is_it" value="form1">
+                <input type="hidden" id="key_mpny" name="key_mpny" value="{{ key_mpny }}">
+
+                <table class="pred-param2">
+                    <colgroup>
+                        <col style="width: 60%;">
+                        <col style="width: 25%;">
+                        <col style="width: 15%;">
+                    </colgroup>
+                    <tr id="row1">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.Q.id_for_label }}" class="form-label">
+                                {{ form.Q.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.Q }}</td>
+                        <td style="text-align: left;">м<sup>3</sup>/час</td>
+                    </tr>
+                    <tr id="row2">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.H.id_for_label }}" class="form-label">
+                                {{ form.H.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.H }}</td>
+                        <td style="text-align: left;">м вод. ст.</td>
+                    </tr>
+                    <tr id="row3">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.istochik.id_for_label }}" class="form-label">
+                                {{ form.istochik.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.istochik}}</td>
+                        <td style="text-align: left;">-</td>
+                    </tr>
+                    <tr id="IST_H_tr">
+                        <td id="IST_H_tr1" style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.IST_H.id_for_label }}" class="form-label">
+                                {{ form.IST_H.label }}
+                            </label>
+                        </td>
+                        <td id="IST_H_tr2" style="text-align: right;">{{ form.IST_H }}</td>
+                        <td id="IST_H_e" style="text-align: left;">м</td>
+                    </tr>
+                    <tr id="IST_V_tr">
+                        <td id="IST_V_tr1" style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.IST_V.id_for_label }}" class="form-label">
+                                {{ form.IST_V.label }}
+                            </label>
+                        </td>
+                        <td id="IST_V_tr2" style="text-align: right;">{{ form.IST_V}}</td>
+                        <td id="IST_V_e" style="text-align: left;">м вод.ст.</td>
+                    </tr>
+                    <tr id="row4">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.DN_in.id_for_label }}" class="form-label">
+                                {{ form.DN_in.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.DN_in }}</td>
+                        <td style="text-align: left;">-</td>
+                    </tr>
+                    <tr id="row5">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.DN_out.id_for_label }}" class="form-label">
+                                {{ form.DN_out.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.DN_out }}</td>
+                        <td style="text-align: left;">-</td>
+                    </tr>
+
+                    <tr id="row6">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.jok_bool.id_for_label }}" class="form-label">
+                                {{ form.jok_bool.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.jok_bool }}</td>
+                        <td style="text-align: left;">-</td>
+                    </tr>
+                    <tr id="row7">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.Q_jok.id_for_label }}" class="form-label">
+                                {{ form.Q_jok.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.Q_jok}}</td>
+                        <td id="Q_jok_e" style="text-align: left; ">м<sup>3</sup>/час</td>
+                    </tr>
+                    <tr id="row8">
+                        <td style="text-align: left; padding-left: 0px;">
+                            <label for="{{ form.H_jok.id_for_label }}" class="form-label">
+                                {{ form.H_jok.label }}
+                            </label>
+                        </td>
+                        <td style="text-align: right;">{{ form.H_jok }}</td>
+                        <td id="H_jok_e" style="text-align: left;">м вод. ст.</td>
+                    </tr>
+                </table>
+                <div>
+                    <label for="{{ form.DN_out_sp.id_for_label }}" class="form-label">
+                        {{ form.DN_out_sp.label }}
+                    </label>
+                </div>
+                {{ form.DN_out_sp}}
+                <div>
+                    <label for="{{ form.DN_in_sp.id_for_label }}" class="form-label">
+                        {{ form.DN_in_sp.label }}
+                    </label>
+                </div>
+                {{ form.DN_in_sp }}
+
+                <button type="submit" id="b1">Подобрать</button>
+            </form>
+            <table class="tab_prod" style=" width: 100%; visibility: collapse; text-align: center; margin-top: 20px; ">
+                <colgroup>
+                    <col style="width: 10%;">   <!--1-й столбец (графики)-->
+                    <col style="width: 10%;">    <!--2-й столбец-->
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                    <!--<col style="width: 9.09%;">-->
+                    <!--<col style="width: 8.33%;">-->
+                </colgroup>
+                <tr>
+                    <td colspan="10" style="padding-bottom:10px;">Выбор производителя насосов:</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Все</td>
+                    <td style="text-align: left;"><input type="checkbox" name="myCheckbox" id="All" onclick="obr('All')"></td>
+                    <td style="text-align: right;">MasDaf</td>
+                    <td style="text-align: left;"><input type="checkbox" name="myCheckbox" id="MasDaf" onclick="obr('var')"></td>
+                    <td style="text-align: right;">CNP</td>
+                    <td style="text-align: left;"><input type="checkbox" name="myCheckbox" id="CNP" onclick="obr('var')"></td>
+                    <td style="text-align: right;">Hydroo</td>
+                    <td style="text-align: left;"><input type="checkbox" name="myCheckbox" id="Hydroo" onclick="obr('var')"></td>
+                    <td style="text-align: right;">Другие</td>
+                    <td style="text-align: left;"><input type="checkbox" name="myCheckbox" id="Other" onclick="obr('var')"></td>
+                </tr>
+            
+            </table>
+            <!--<td style="text-align: right;">Lubi</td>-->
+            <input type="checkbox" name="myCheckbox" id="Lubi" onclick="obr('var')" style="display:none;" >
+            {% if result is not None %}
+            <form id="TY3">
+                <div style="display: flex; align-items: center;">
+                    <select name="pump" id="pump-select">
+                        {% for pump in result %}
+                        <option value="{{ pump }}">{{ pump }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="item" id="sort_id" style="margin-left: 10px" onclick="sort(event)">
+                        <option value="price">Стоимость &#9650;</option>
+                        <option value="power">Мощность &#9650;</option>
+                        <option value="price_up">Стоимость &#9660;</option>
+                        <option value="power_up">Мощность &#9660;</option>
+                    </select>
+                </div>
+            </form>
+
+            {% endif %}
+
+
+            <form id="TY">
+                <canvas id="myChart"></canvas>
+            </form>
+
+        </div>
+        <div class="container TY-Text1" style="min-height: 0px; visibility: hidden; ">
+            <form id="TY1" style="display: none;">
+
+                <img class="fit-picture"
+                     id="IMG1"                     
+                     src="{% static 'images/M.png' %}" />
+
+                      <!-- src='/static/app/img/M.png' /> -->
+
+            </form>
+
+            <div class="container Tex-opis" style="min-height: 10px; ">
+                {% if result is not None %}
+                <div class="container Glavi1" style="min-height: 10px; ">
+                    <h2>Предлагаемые параметры</h2>
+                    <div class="container param-texopis" style="min-height: 10px;">
+                        <table class="pred-param">
+                            <colgroup>
+                                <col style="width: 55%;">   <!--1-й столбец (графики)-->
+                                <col style="width: 20%;">    <!--2-й столбец-->
+                                <col style="width: 25%;">
+                            </colgroup>
+                            <tr>
+                                <td class="left-cell">Расход МПНУ</td>
+                                <td class="right-cell" id="Q_f">-</td>
+                                <td class="left-cell">м<sup>3</sup>/час</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Напор МПНУ</td>
+                                <td class="right-cell" id="H_f">-</td>
+                                <td class="left-cell">м вод. ст.</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">NPSH (не менее) <img src="{% static 'images/vop_ico13.png' %}"
+                                 title="NPSH — это минимальное давление, которое должно быть на входе насоса, чтобы вода не закипала и не образовывались пузырьки пара (кавитация). Если давление ниже этого значения, насос работает в кавитационном режиме, что приводит к снижению гидравлической эффективности и может вызвать повреждение насоса."
+                                 style="cursor: help; width:18px; height:18px; vertical-align:middle; margin-left:0px;"></td>
+                                <td class="right-cell" id="NPSH_F">-</td>
+                                <td class="left-cell">м вод. ст.</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Напор жокей-насоса</td>
+                                <td class="right-cell" id="H_jokf">-</td>
+                                <td class="left-cell">м вод. ст.</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <h2>Технические параметры</h2>
+                    <div class="container tex-param" style="min-height: 10px; ">
+                        <table class="texn-param">
+                            <colgroup>
+                                <col style="width: 60%;">   <!--1-й столбец (графики)-->
+                                <col style="width: 25%;">    <!--2-й столбец-->
+                                <col style="width: 15%;">
+
+                            </colgroup>
+                            <tr>
+                                <td class="left-cell">Потребляемая мощность</td>
+                                <td class="right-cell" id="Power_f">-</td>
+                                <td class="left-cell">кВт</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Напряжение питания</td>
+                                <td class="right-cell" id="U_f">-</td>
+                                <td class="left-cell">В</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Кол-во насосных агрегатов</td>
+                                <td class="right-cell" id="Kol">-</td>
+                                <td class="left-cell">шт</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Масса насосных агрегатов</td>
+                                <td class="right-cell" id="mass">-</td>
+                                <td class="left-cell">кг</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                {% endif %}
+                {% if result is not None %}
+                <div class="container Glavi2" style="min-height: 10px;">
+                    <h2>Габаритно-присоединительные размеры</h2>
+                    <div class="container gabarit" style="min-height: 10px;">
+
+                        <table class="gab-param">
+                            <colgroup>
+                                <col style="width: 55%;">   <!--1-й столбец (графики)-->
+                                <col style="width: 30%;">    <!--2-й столбец-->
+                                <col style="width: 15%;">
+
+                            </colgroup>
+                            <tr>
+                                <td class="left-cell">Входной коллектор</td>
+                                <td class="right-cell" id="DN_in_f">-</td>
+                                <td class="left-cell">-</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">Выходной коллектор</td>
+                                <td class="right-cell" id="DN_out_f">-</td>
+                                <td class="left-cell">-</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">А</td>
+                                <td class="right-cell" id="A">-</td>
+                                <td class="left-cell">мм</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">B</td>
+                                <td class="right-cell" id="B">-</td>
+                                <td class="left-cell">мм</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">C</td>
+                                <td class="right-cell" id="C">-</td>
+                                <td class="left-cell">мм</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">D</td>
+                                <td class="right-cell" id="D">-</td>
+                                <td class="left-cell">мм</td>
+                            </tr>
+                            <tr>
+                                <td class="left-cell">F</td>
+                                <td class="right-cell" id="F">-</td>
+                                <td class="left-cell">мм</td>
+                            </tr>
+                        </table>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+            <a id="pdf-link" href="#" download onclick="updatePdfLink()">
+                <button type="submit" id="b2" style="margin-top: 10px; margin-bottom: 10px; visibility: hidden; ">Скачать PDF</button>
+            </a>
+        </div>
+
+
+        <dialog id="modal" style="width: 40%; height: 170px; border-radius: 30px; border: 8px solid #0F1379; outline: none; ">
+            <p style=" font-size: 16px; text-align: justify;">К сожалению, по заданным параметрам автоматический подбор выполнить не удалось.</p>
+            <p style=" font-size: 16px; text-align: justify;">Рекомендуем изменить исходные данные или заполнить опросный лист, чтобы наши специалисты могли подобрать насосную установку, максимально соответствующую вашим требованиям.</p>
+            <div id="okno" style="display: flex; margin-top: 10px;">
+                <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                    <button id="close">Изменить данные</button>
+                </div>
+                <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                    <button id="list">
+                        <a href="https://sa-biysk.ru/catalog/1344/#mpnu" target="_blank" class="btn btn-primary" style="font-size: 16px; color: #fff; text-decoration: none;">
+                            Заполнить опросный лист
+                        </a>
+                    </button>
+                </div>
+
+            </div>
+
+        </dialog>
+
+    </div>
+    <!-- <footer id="Footer">
+        <div class="d-flex1 flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="https://sa-biysk.ru/" class="logo_up d-flex1 align-items-center me-lg-auto" style="height: 96px; ">
+                <img src='/static/app/img/logo_small.svg' height="50" role="img" aria-label="Спецавтоматика" class="logo" />
+            </a>
+    
+            <div class="d-none1 d-sm-block">
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <span class="nav-link2 text-white">
+                            © 1972 - {% now "Y" %} ЗАО «ПО «Спецавтоматика»
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer> -->
+</body>
+</html>
+{% endblock %}
+<!-- <script>
+
+    document.getElementById('b2').addEventListener('click', function() {
+        ym(29995129, 'reachGoal', 'mpnu-pdf');
+    });
+
+
+    var name1 = "";
+    function updatePdfLink() {
+        const key_mpny=document.getElementById('key_mpny').value;
+        const link = document.getElementById('pdf-link');
+        const baseUrl = "{% url 'generate_pdf' %}";  // Django подставит URL на сервере
+        link.href = baseUrl + "?name=" + encodeURIComponent(name1)+"&key_mpny="+encodeURIComponent(key_mpny);
+    }
+    /* var name1 = "" */
+    /*const imgData = ""*/
+    /*function updatePdfLink() {*/
+
+    /*  const link = document.getElementById('pdf-link');*/
+    /* link.href = `{% url 'generate_pdf' %}?name=${encodeURIComponent(name1)}`;*/
+
+    /* }*/
+
+    function wind() {
+        const dialog = document.getElementById('modal');
+        let All = document.getElementById('All');
+        let MasDaf = document.getElementById('MasDaf');
+        let Lubi = document.getElementById('Lubi');
+        let CNP = document.getElementById('CNP');
+        let Hydroo = document.getElementById('Hydroo');
+        let Other = document.getElementById('Other');
+        
+        // Проверяем, что все чекбоксы сняты
+        let allUnchecked = !All.checked && !MasDaf.checked  && !CNP.checked && !Hydroo.checked && !Other.checked;
+        
+        if (allUnchecked) {
+            // Если все сняты — диалог не открываем или сразу закрываем
+            if (dialog.open) {
+                dialog.close();
+                
+            }
+            const elem1 = document.querySelector('.container.TY-Text1');
+            const elem2 = document.getElementById('TY3');
+            const elem3 = document.getElementById('TY');
+            const elem4 = document.getElementById('b2');
+            /*const elem5 = document.querySelector('.tab_prod');*/
+            if (elem1) elem1.style.visibility = 'hidden';
+            if (elem2) elem2.style.visibility = 'hidden';
+            if (elem3) elem3.style.visibility = 'hidden';
+            if (elem4) elem4.style.visibility = 'hidden';
+            /*if (elem5) elem5.style.visibility = 'hidden';*/
+            return; // Выходим из функции, не показывая диалог
+            
+        }
+        dialog.showModal();
+        document.getElementById('close').onclick = () => dialog.close();
+    }
+
+    function JOK() {
+
+        const jok_bool = document.getElementById('jok_bool');
+
+        const H_jok = document.getElementById('H_jok');
+        const form1 = document.getElementById('form1');
+        const H = document.getElementById('H').value;
+        const Q_jok = document.getElementById('Q_jok');
+        const H_jok_e = document.getElementById('H_jok_e');
+        const Q_jok_e = document.getElementById('Q_jok_e');
+        const row7 = document.getElementById('row7');
+        const row8 = document.getElementById('row8');
+
+        const Q_jok_label = document.querySelector('label[for="Q_jok"]');
+        const H_jok_label = document.querySelector('label[for="H_jok"]');
+        if (jok_bool.checked) {
+            row7.style.display = 'table-row';
+            row8.style.display = 'table-row';
+            H_jok_e.style.display = 'table-cell';
+            Q_jok_e.style.display = 'table-cell';
+            H_jok.style.display = 'inline';
+            Q_jok.style.display = 'inline';
+            Q_jok_label.style.display = 'inline';
+            H_jok_label.style.display = 'inline';
+            form1.style.height = 'auto';
+            if (H_jok.value == 0) {
+                H_jok.value = parseFloat(H) + 5;
+            }
+
+            if (Q_jok.value == 0) {
+                Q_jok.value = 3;
+            }
+
+        }
+        else {
+            row7.style.display = 'none';
+            row8.style.display = 'none';
+            H_jok_e.style.display = 'none';
+            Q_jok_e.style.display = 'none';
+            H_jok.style.display = 'none';
+            Q_jok.style.display = 'none';
+            Q_jok_label.style.display = 'none';
+            H_jok_label.style.display = 'none';
+            /*form1.style.height = 'auto';*/
+        }
+    }
+
+    function only_ist() {
+        const IST = document.getElementById('istochik').value;
+        //const IST_H_value = parseFloat(document.getElementById('IST_H').value);
+        //const IST_V_value = parseFloat(document.getElementById('IST_V').value);
+        const IST_H_value = document.getElementById('IST_H').value;
+        const IST_V_value = document.getElementById('IST_V').value;
+
+        if (IST == "v") {
+
+            document.getElementById('IST_H').style.display = 'none';
+
+            document.getElementById('IST_H_tr').style.display = 'none';
+            document.getElementById('IST_V_tr').style.display = 'table-row';
+            //document.getElementById('IST_H_tr2').style.display = 'none';
+            //document.getElementById('IST_V_tr2').style.display = 'table-row';
+            document.getElementById('IST_V').style.display = 'table-row';
+
+            //document.getElementById('IST_H_e').style.display = 'none';
+            //document.getElementById('IST_V_e').style.display = 'inline';
+
+            document.querySelector('label[for="IST_H"]').style.display = 'none'
+            document.querySelector('label[for="IST_V"]').style.display = 'table-row';
+        }
+        else if (IST == "r_up" && IST_H_value >= 0) {
+            document.getElementById('IST_H').style.display = 'table-row'
+            document.getElementById('IST_V').style.display = 'none';
+            //document.getElementById('IST_H_e').style.display = 'inline'
+            //document.getElementById('IST_V_e').style.display = 'none';
+            document.getElementById('IST_H_tr').style.display = 'table-row';
+            document.getElementById('IST_V_tr').style.display = 'none';
+            //document.getElementById('IST_H_tr2').style.display = 'table-row';
+            //document.getElementById('IST_V_tr2').style.display = 'none';
+
+            document.querySelector('label[for="IST_H"]').style.display = 'table-row'
+            document.querySelector('label[for="IST_V"]').style.display = 'none';
+        }
+        else if (IST == "r_up" && IST_H_value < 0) {
+
+
+            document.getElementById('IST_H_tr').style.display = 'table-row';
+            document.getElementById('IST_V_tr').style.display = 'none';
+
+            //document.getElementById('IST_H_tr2').style.display = 'table-row';
+            //document.getElementById('IST_V_tr2').style.display = 'none';
+
+            document.getElementById('IST_H').style.display = 'table-row'
+            document.getElementById('IST_V').style.display = 'none';
+            //document.getElementById('IST_H_e').style.display = 'inline'
+            //document.getElementById('IST_V_e').style.display = 'none';
+            document.querySelector('label[for="IST_H"]').style.display = 'table-row'
+            document.querySelector('label[for="IST_V"]').style.display = 'none';
+        }
+    }
+    window.onload = function () {
+        document.getElementById('All').checked = true;
+        obr('All');
+    };
+    function obr(satus) {
+
+        let All = document.getElementById('All');
+        let MasDaf = document.getElementById('MasDaf');
+        let Lubi = document.getElementById('Lubi');
+        let CNP = document.getElementById('CNP');
+        let Hydroo = document.getElementById('Hydroo');
+        let Other = document.getElementById('Other');
+
+        let allChecked = All.checked;
+        let masDafChecked = MasDaf.checked;
+        let lubiChecked = Lubi.checked;
+        let cnpChecked = CNP.checked;
+        let hydrooChecked = Hydroo.checked;
+        let otherChecked = Other.checked;
+
+        if (satus == "All" && allChecked == true) {
+            MasDaf.checked = true;
+            Lubi.checked = true;
+            CNP.checked = true;
+            Hydroo.checked = true;
+            Other.checked = true;
+        }
+        if (satus == "All" && allChecked == false) {
+            MasDaf.checked = false;
+            Lubi.checked = false;
+            CNP.checked = false;
+            Hydroo.checked = false;
+            Other.checked = false;
+        }
+        if (satus == "var") {
+            All.checked = false;
+
+        }
+        if (satus == "var") {
+            All.checked = MasDaf.checked && Lubi.checked && CNP.checked && Hydroo.checked && Other.checked;
+        }
+        document.getElementById('sort_id').click();
+
+    }
+    function sort(event) {
+        let All = document.getElementById('All').checked;
+        let MasDaf = document.getElementById('MasDaf').checked;
+        let Lubi = document.getElementById('Lubi').checked;
+        let CNP = document.getElementById('CNP').checked;
+        let Hydroo = document.getElementById('Hydroo').checked;
+        let Other = document.getElementById('Other').checked;
+        const type = event.target.value;
+        const select = document.getElementById("pump-select");
+        
+        // Получение CSRF-токена из cookie (для Django)
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Проверяем, начинается ли cookie с нужного имени
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const key_mpny=document.getElementById('key_mpny').value;
+        const csrftoken = getCookie('csrftoken');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "Sort" %}',  // URL представления get_data
+            data: {
+                variable: type,
+                Other: Other,
+                Hydroo: Hydroo,
+                CNP: CNP,
+                Lubi: Lubi,
+                MasDaf: MasDaf,
+                key_mpny: key_mpny,
+
+
+
+            },
+            headers: { 'X-CSRFToken': csrftoken },  // Добавляем CSRF-токен в заголовки
+            success: function (data) {
+                select.innerHTML = '';
+                for (const [value, text] of Object.entries(data)) {
+                    const option = document.createElement('option');
+                    option.value = value;
+                    option.textContent = text;
+                    select.appendChild(option);
+                }
+                select.click();
+            }
+        });
+    }
+
+    function rescount() {
+        const Q = document.getElementById('Q').value;
+        /*        const istochik = document.getElementById('istochik').value;*/
+        let istochik = 0;
+        const IST = document.getElementById('istochik').value;
+        //const IST_H_value = parseFloat(document.getElementById('IST_H').value);
+        //const IST_V_value = parseFloat(document.getElementById('IST_V').value);
+        const IST_H_value = document.getElementById('IST_H').value;
+        const IST_V_value = document.getElementById('IST_V').value;
+        if (IST == "v") {
+            document.getElementById('IST_H').style.display = 'none'
+            document.getElementById('IST_V').style.display = 'inline';
+            document.querySelector('label[for="IST_H"]').style.display = 'none'
+            document.querySelector('label[for="IST_V"]').style.display = 'inline';
+            istochik = 2.8;
+            //document.getElementById('IST_H_e').style.display = 'none';
+            //document.getElementById('IST_V_e').style.display = 'inline';
+
+            document.getElementById('IST_H_tr').style.display = 'table-row';
+            document.getElementById('IST_V_tr').style.display = 'inline';
+            //document.getElementById('IST_H_tr2').style.display = 'table-row';
+            //document.getElementById('IST_V_tr2').style.display = 'inline';
+        }
+        else if (IST == "r_up" && IST_H_value >= 0) {
+            document.getElementById('IST_H').style.display = 'inline'
+            document.getElementById('IST_V').style.display = 'none';
+            document.querySelector('label[for="IST_H"]').style.display = 'inline'
+            document.querySelector('label[for="IST_V"]').style.display = 'none';
+            istochik = 2.8;
+
+            //document.getElementById('IST_H_e').style.display = 'inline'
+            //document.getElementById('IST_V_e').style.display = 'none';
+            document.getElementById('IST_H_tr').style.display = 'table-row';
+            document.getElementById('IST_V_tr').style.display = 'none';
+            //document.getElementById('IST_H_tr2').style.display = 'table-row';
+            //document.getElementById('IST_V_tr2').style.display = 'none';
+            /*alert(IST_H_value);*/
+        }
+        else if (IST == "r_up" && IST_H_value < 0) {
+            document.getElementById('IST_H').style.display = 'inline'
+            document.getElementById('IST_V').style.display = 'none';
+            document.querySelector('label[for="IST_H"]').style.display = 'inline'
+            document.querySelector('label[for="IST_V"]').style.display = 'none';
+            istochik = 1.5;
+            //document.getElementById('IST_H_e').style.display = 'inline'
+            //document.getElementById('IST_V_e').style.display = 'none';
+            document.getElementById('IST_H_tr').style.display = 'table-row';
+            document.getElementById('IST_V_tr').style.display = 'none';
+            //document.getElementById('IST_H_tr2').style.display = 'table-row';
+            //document.getElementById('IST_V_tr2').style.display = 'none';
+        }
+        const DN_in = document.getElementById('DN_in');
+        const DN_out = document.getElementById('DN_out');
+        const DN = [50, 65, 80, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500];
+        DN_in.innerHTML = '';
+        DN_out.innerHTML = '';
+        const DN_in_sp = [];
+        const DN_out_sp = [];
+        for (let i = 0; i < DN.length; i++) {
+            var Speed = (Q / 3600) / ((DN[i] / 1000) * (DN[i] / 1000) * 3.14 / 4)
+            if (Speed <= istochik) {
+                DN_in.add(new Option("DN " + DN[i], DN[i]));
+                DN_in_sp.push(DN[i]);
+
+            }
+            if (Speed <= 10) {
+                DN_out.add(new Option("DN " + DN[i], DN[i]));
+                DN_out_sp.push(DN[i]);
+
+            }
+
+        }
+
+        document.getElementById('DN_out_sp').value = JSON.stringify(DN_out_sp);
+        document.getElementById('DN_in_sp').value = JSON.stringify(DN_in_sp);
+
+
+
+    }
+    function resetResults() {
+
+        const elem1 = document.querySelector('.container.TY-Text1');
+        const elem2 = document.getElementById('TY3');
+        const elem3 = document.getElementById('TY');
+        const elem4 = document.getElementById('b2');
+        const elem5 = document.querySelector('.tab_prod');
+        //const elem5 = document.getElementById('tab_prod');
+        if (elem1) {elem1.style.visibility = 'hidden';}
+        if (elem2) {elem2.style.visibility = 'hidden';}
+        if (elem3) {elem3.style.visibility = 'hidden';}
+        if (elem4) {elem4.style.visibility = 'hidden';}
+        if (elem5) {elem5.style.visibility = 'hidden';}
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+
+        const Q = document.getElementById('Q');
+        const H = document.getElementById('H');
+        const istochik = document.getElementById('istochik');
+        const jok_bool = document.getElementById('jok_bool');
+        const IST_H_value = document.getElementById('IST_H');
+        const form1 = document.getElementById('form1');
+        const table = document.querySelector('.pred-param2');
+        if (jok_bool.checked) { const t = 9; }
+        else {
+            const H_jok = document.getElementById('H_jok').style.display = 'none';
+            const Q_jok = document.getElementById('Q_jok').style.display = 'none';
+            const Q_jok_label = document.querySelector('label[for="Q_jok"]');
+            const H_jok_label = document.querySelector('label[for="H_jok"]');
+            //const H_jok_e = document.getElementById('H_jok_e');
+            //const Q_jok_e = document.getElementById('Q_jok_e');
+            Q_jok_label.style.display = 'none';
+            H_jok_label.style.display = 'none';
+            H_jok_e.style.display = 'none';
+            Q_jok_e.style.display = 'none';
+            /*          document.getElementById('IST_H').style.display = 'none'*/
+            //document.getElementById('IST_V').style.display = 'none';
+            //document.getElementById('IST_V_e').style.display = 'none';
+            ///*      document.querySelector('label[for="IST_H"]').style.display = 'none'*/
+            //document.querySelector('label[for="IST_V"]').style.display = 'none';
+        }
+        if (jok_bool) {
+            jok_bool.addEventListener('change', function (event) {
+                JOK();
+            });
+        }
+        if (Q) {
+            Q.addEventListener('change', function (event) {
+                rescount();
+                only_ist();//добавил тут
+            });
+        }
+        if (H) {
+            H.addEventListener('change', function (event) {
+                JOK();
+            });
+        }
+        if (istochik) {
+            istochik.addEventListener('change', function (event) {
+                rescount();
+                only_ist();
+            });
+
+
+        }
+        if (IST_H_value) {
+            IST_H_value.addEventListener('change', function (event) {
+                rescount();
+                only_ist();
+            });
+
+
+        }
+        //if (form1) {
+            //form1.addEventListener('input', resetResults);
+            //form1.addEventListener('change', resetResults);
+       // }
+        if (table) {
+                table.addEventListener('change', function(event) {
+                    const target = event.target;
+                    // Проверяем, что событие произошло на input, select или textarea внутри таблицы
+                    if (target.matches('input, select, textarea')) {
+                        // Ваша функция, которая будет вызываться при изменении
+                        resetResults();
+                       
+                    }
+    });
+}
+       
+
+
+
+
+        only_ist();
+        JOK();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const pump = document.getElementById('pump-select');
+
+        if (pump) {
+            pump.addEventListener('click', function (event) {
+                const selectedPump = event.target.value;
+                if (selectedPump == "") { wind(); }
+                only_ist();
+                CHART(selectedPump);
+                if (selectedPump != "") {
+                    //const elem1 = document.querySelector('.container.TY-Text1');
+                    const elem2 = document.getElementById('TY3');
+                    const elem3 = document.getElementById('TY');
+                    //const elem4 = document.getElementById('b2');
+                    /*const elem5 = document.querySelector('.tab_prod');*/
+                    //if (elem1) elem1.style.visibility = 'visible';
+                    if (elem2) elem2.style.visibility = 'visible';
+                    if (elem3) elem3.style.visibility = 'visible';
+                    //if (elem4) elem4.style.visibility = 'visible';
+                    /*if (elem5) elem5.style.visibility = 'hidden';*/
+                }
+
+
+
+            });
+        }
+        pump.click();
+    });
+    let myChart = null; // Для хранения экземпляра графика
+    let ctx = null;
+    var name;
+    function CHART(name) {
+        let Q = null;  // Данные для Q
+        let H = null;
+        let Qgl = null;
+        let Hgl = null;
+        name1 = name
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Проверяем, начинается ли cookie с нужного имени
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        key_mpny=document.getElementById('key_mpny').value;
+
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "get_data" %}',  // URL представления get_data
+            data: { variable: name,
+                    key_mpny: key_mpny,
+                
+                
+            },  // Передача переменной
+            headers: { 'X-CSRFToken': csrftoken },  // Добавляем CSRF-токен в заголовки
+            success: function (data) {
+                // Обрабатываем полученные данные
+                Q = data.Q;  // Данные для Q
+                H = data.H;
+                Qgl = data.Qgl;
+                Hgl = data.Hgl
+                Comment = data.Comment;
+                src = data.img;
+                var d = document.getElementById("IMG1");
+                document.getElementById('TY1').style.display = 'block';
+                document.querySelector('.container.TY-Text1').style.visibility = 'visible';
+                document.getElementById('b2').style.visibility = 'visible';
+                document.querySelector('.tab_prod').style.visibility = 'visible';
+
+
+                /*            document.getElementById("Text1").innerHTML = Comment;*/
+
+                Q_f = data.Q_f
+                H_f = data.H_f
+                Power_f = data.Power_f
+                Kol = data.Kol
+                DN_in = data.DN_in
+                DN_out = data.DN_out
+                NPSH_F = data.NPSH_F
+                mass = data.mass
+
+                Q_jok = data.Q_jok
+                H_jok = data.H_jok
+                A = data.A
+                B = data.B
+                C = data.C
+                D = data.D
+                F = data.F
+                document.getElementById("A").innerHTML = A;
+                document.getElementById("B").innerHTML = B;
+                document.getElementById("C").innerHTML = C;
+                document.getElementById("D").innerHTML = D;
+                document.getElementById("F").innerHTML = F;
+
+                document.getElementById("Q_f").innerHTML = Q_f;
+                document.getElementById("H_f").innerHTML = H_f;
+                document.getElementById("Power_f").innerHTML = Power_f;
+                document.getElementById("U_f").innerHTML = 400;
+                document.getElementById("Kol").innerHTML = Kol;
+                document.getElementById("DN_in_f").innerHTML = 'DN ' + DN_in;
+                document.getElementById("DN_out_f").innerHTML = 'DN ' + DN_out;
+                document.getElementById("NPSH_F").innerHTML = NPSH_F;
+                document.getElementById("mass").innerHTML = mass;
+                document.getElementById("H_jokf").innerHTML = H_jok;
+                /*            document.getElementById("H_jok").innerHTML = H_jok;*/
+                /*    document.getElementById("Q_jok").innerHTML = Q_jok;*/
+                d.src = src;
+
+                const X = Q;
+                const Y = H;
+                const Names = "";
+
+                const Xt = Qgl;
+                const Yt = Hgl;
+                const Namest = "";
+
+                const data1 = []; // Массив для данных первой кривой (x и y)
+                const data2 = []; // Массив для данных второй кривой (x и y)
+                for (let i = 0; i < X.length; i++) {
+                    data1.push({ x: X[i], y: Y[i], });
+                }
+                for (let i = 0; i < Xt.length; i++) {
+                    data2.push({ x: Xt[i], y: Yt[i], });
+                }
+                // Фильтруем данные для первой кривой
+
+                if (!ctx) {
+                    const canvas = document.getElementById("myChart");
+                    ctx = canvas.getContext('2d');
+                }
+
+                if (myChart) {
+                    // Обновляем данные графика
+                    myChart.data.datasets[0].data = data1;
+                    if (myChart.data.datasets.length > 1) { // Проверяем, существует ли datasets[1]
+                        myChart.data.datasets[1].data = data2;
+                    } else {
+                        //Если не существует, добавляем новый dataset
+                        myChart.data.datasets.push({
+                            label: 'Данные 2',
+                            data: data2,
+                            borderColor: 'rgb(236, 0, 0)', // Изменен цвет
+                            borderWidth: 2
+                        });
+                    }
+                    myChart.update();
+                } else {
+                    // Создаем график
+                    const initialData = {
+                        datasets: [{
+                            label: 'Кривая МПНУ',
+                            data: data1,
+                            borderColor: 'rgb(15, 19, 121)',
+                            borderWidth: 4,
+                            pointRadius: 0,
+                            tension: 0.5
+                        }, {
+                            label: 'точка',
+                            data: data2,
+                            borderColor: 'red', // Изменен цвет
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0
+                        }]
+                    };
+
+                    myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: initialData,
+                         options: {
+                             responsive: true,
+                             /*maintainAspectRatio: false,*/
+                             scales: {
+                                 x: {
+                                     type: 'linear', // Или 'time', если X значения - даты
+                                     position: 'bottom',
+                        
+                                     title: {
+                                         display: true,
+                                         text: 'Расход, м³/ч', // Подпись оси X
+                                         font: { size: 16, weight: 'bold' }
+                                     }
+                        
+                        
+                                 },
+                                 y: {
+                                     type: 'linear',
+                                     position: 'left',
+                                     beginAtZero: false,
+                                     title: {
+                                         display: true,
+                                         text: 'Напор, м', // Подпись оси X
+                                         font: { size: 16, weight: 'bold' }
+                                     }
+                                 }
+                             },
+                             plugins: {
+                                 legend: {
+                                     labels: {
+                                         font: {           // Вложенный объект font
+                                             family: 'Arial',
+                                             size: 16,
+                                             weight: 'normal',
+                                             style: 'normal'
+                                         },
+                                         /*color: '#000000'  // Цвет текста легенды*/
+                                     }
+                                 }
+                             }
+                         }
+                    });
+                }
+
+            },
+            //error: function (xhr, status, error) {
+            //    // Обработка ошибок
+            //    console.error('Ошибка при запросе:', error);
+            //}
+        });
+
+
+    }
+
+
+</script> -->
