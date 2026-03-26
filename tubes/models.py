@@ -18,7 +18,7 @@ class Type(models.Model):
     ext_size = models.DecimalField(max_digits=10, decimal_places=1, verbose_name="Наружный диаметр, мм")
     thickness = models.DecimalField(max_digits=10, decimal_places=1, verbose_name="Толщина стенки, мм")
     k_t = models.DecimalField(max_digits=15, decimal_places=4, verbose_name="Удельная характеристика Kт, л²/с²")
-
+    kvelocity = models.DecimalField(max_digits=15, decimal_places=4, verbose_name="Скоростной коэфицент")
     def __str__(self):
         return f"{self.tube_type.name} DN {self.nom_size}"
 

@@ -57,21 +57,21 @@
     </article>
 <!-- калькулятор подбора диаметров отверстий аспирационной системы ИПА -->
      <article style="margin-bottom: 40px; ">
-        <a class="article1" >
-        <!-- <a class="article1" href="ipa/" >    -->
-            <div class="container module">
+        {% comment %} <a class="article1" > {% endcomment %}
+        <a class="article1" href="ipa/" >    
+            {% comment %} <div class="container module">
                 <div class="viewer-container"> 
                 <!-- <h2 style="color: #333; margin-bottom: 15px;">ДАЭ 100.414.000 СБ</h2> -->
                 <canvas id="renderCanvas" style="width: 1000px; height: auto;"></canvas>
                 <p style="color: #666; margin-top: 10px; font-size: 14px;">
                     ЛКМ+drag: вращение | Колёсико: зум
                 </p>
-            </div>
+            </div> {% endcomment %}
                 
                 <!-- <div id="viewer" style="width:400px;height:300px;border:1px solid #ccc;"></div>               -->
 
 
-                <!-- <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa"> -->
+                <img class="image1" width="auto" height="300px" src="/static/images/ipa.jpg" alt="ipa">
                 <!-- <video class="image1" width="auto" height="300px" muted loop autoplay playsinline preload="metadata" poster="/static/images/air.jpg">
                     <source src="/static/images/test.mp4" type="video/mp4">
                      Ваш браузер не поддерживает видео.
@@ -122,7 +122,7 @@
 </script> -->
 
 
-<script>
+{% comment %} <script>
         const canvas = document.getElementById("renderCanvas");
         const engine = new BABYLON.Engine(canvas, true);
         
@@ -275,7 +275,7 @@
         const scene = createScene();
         engine.runRenderLoop(() => scene.render());
         window.addEventListener("resize", () => engine.resize());
-    </script>
+    </script> {% endcomment %}
 
 
     

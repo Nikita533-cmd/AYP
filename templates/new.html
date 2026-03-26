@@ -124,8 +124,12 @@
             <div class="col-md-6 d-grid">
               <button type="reset" class="btn btn-secondary">Сбросить</button>
             </div>
+
+
+
           </div>
         </form>
+
       </div>
     </div>
 
@@ -335,15 +339,19 @@
   <div class="row" style="width: 100%">
     <div class="col-xl-12">
       <div class="white-box">
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
+        <form id="mainForm" method="post" action="/ayp_api/sole/">
+          {% csrf_token %}
+          <label for="count_branch">Количетво ветвей</label>
+          <input type="number" id="count_branch" name="count_branch" min="1" max="30">
+          <button  id='button_id_ayp'>Создать ветки</button>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+          {% comment %} <li class="nav-item" role="presentation">
             <button class="nav-link" id="add-branch-btn" type="button">+ Добавить ветвь</button>
-          </li>
-        </ul>
-
-        <div class="tab-content" id="myTabContent"></div>
-
+          </li> {% endcomment %}
+          </ul>
+          <div class="tab-content" id="myTabContent"></div>
+           <button type="submit"> Рассчитать</button>
+        </form>
       </div>
     </div>
   </div>

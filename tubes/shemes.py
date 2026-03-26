@@ -8,3 +8,4 @@ class TubeSchema(Schema):
     ext_size: Decimal
     thickness: Decimal
     k_t: Decimal
+    kvelocity: Decimal
