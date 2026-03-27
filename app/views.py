@@ -563,7 +563,7 @@ def generate_pdf(request):
             'F': int(M.F),
             'ISTOK' : ISTOK,
             'Name_MPNY':Name_MPNY,
-            'data_generate':f"Дата: {formatted_date}",
+            'data_generate':f"{formatted_date}",
             'nasos_name' : M.nasos_name,
            
         }
@@ -600,8 +600,9 @@ def generate_pdf(request):
         #response = HttpResponse(pdf, content_type='application/pdf')
         #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
         #return response
+        # html_string = render_to_string("users/mpnu_pdf.html", context)
         html_string = render_to_string("users/mpnu_pdf.html", context)
-        pdf = HTML(string=html_string).write_pdf()
+        pdf = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf()
         
         response = HttpResponse(pdf, content_type='application/pdf')
         filename = f"{Name_MPNY}.pdf"

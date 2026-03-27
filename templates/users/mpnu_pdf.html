@@ -18,6 +18,7 @@
         
     .up_kolontitul {
       border: none;
+      margin-bottom: 20px;
     }
 
     .up_kolontitul td {
@@ -67,13 +68,20 @@
       background-color: white;
     }
     
-    body {
+    body {      
       font-family: 'Roboto','DejaVu Sans', Arial, sans-serif;
-      font-size: 20px;
-      margin-bottom: 0;
+      font-size: 15px;
+      /* margin-bottom: 0; */
       color: #000;
     }
 
+    h2 {
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      margin: 0%;
+    }
+     
     .Tabl-2-2 {
         display: flex;
         flex-direction: column; /* расположить элементы вертикально */
@@ -83,23 +91,19 @@
         text-align: center; /* центрируем содержимое по горизонтали */
     }
 
-    .Tabl-2-3 {
-        font-family: "Roboto";
-        font-size: 17px;
+    .Tabl-2-3 {         
         max-height: 1300px; /* или фиксированная высота для вертикального центрирования */
+        
         /*height: 1301px;*/ /* или фиксированная высота для вертикального центрирования */
-    }
+    } 
 
-    .Tabl-2-4, .Tabl-2-5 {
-        font-family: "Roboto";
-        font-size: 17px;
-        /*height: 1301px;*/ /* или фиксированная высота для вертикального центрирования */
+    .Tabl-2-4, .Tabl-2-5 {             
         max-height: 1300px; /* или фиксированная высота для вертикального центрирования */
     }
 
-    .main-table, .main-table1, .table-gidr {
-        font-family: "Roboto";
-        font-size: 17px;
+    .main-table, .main-table1, .table-gidr {  
+        /* text-align: center;      */
+        font-size: 12px;
         border-collapse: collapse; /* убрать двойные границы */
         /*width: 100%;*/ /* занять всю ширину страницы */
     }
@@ -147,13 +151,13 @@
               </colgroup>
               <tr>
                   <td>
-                      <img src="app/img/kostrul.png" alt="Изображение"  style="width: 393px; height: 73px; margin-top: 20px;">
+                      <img src="/static/images/kostrul.png" alt="Изображение"  style="width: 393px; height: 73px; margin-top: 20px;">
                       <!-- <img src="/static/images/kostrul.png" alt="Изображение"  style="width: 393px; height: 73px; margin-top: 20px;"> -->
                        
                   </td>
                   <td style="padding-left: 11px;">
                       Сгенерировано на сайте aup_bsk <br />
-                      Дата: {{ dt }}
+                      Дата: {{ data_generate }}
                   </td>
               </tr>
           </table>                                    
@@ -207,16 +211,16 @@
         <table class="main-table" style="table-layout: fixed; width: 100% ">
             <colgroup>
                 <col style="width: 50%;">   <!--1-й столбец (графики)-->
-                <col style="width: 26%;">     <!--2-й столбец-->
-                <col style="width: 11%;">     <!--3-й столбец-->
-                <col style="width: 13%;">     <!--4-й столбец-->
+                <col style="width: 30%;">     <!--2-й столбец-->
+                <col style="width: 9%;">     <!--3-й столбец-->
+                <col style="width: 11%;">     <!--4-й столбец-->
             </colgroup>
             <tbody>
                 
                 
                 
                 <tr>
-                    <td class="section-title" colspan="4" style="text-align: center; font-weight: bold; font-size: 20px;">Техническое описание {{Name_MPNY}}</td>
+                    <td class="section-title" colspan="4" style="text-align: center; font-weight: bold;">Техническое описание {{Name_MPNY}}</td>
                 </tr>
 
                 <tr>
@@ -225,7 +229,7 @@
                         <img src="{{ chart_img_h }}" alt="График 1" style="width: 100%; height: auto">
                     </td>
 
-                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Запрашиваемые параметры рабочей точки:</td>
+                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold;">Запрашиваемые параметры рабочей точки:</td>
 
                 </tr>
                 <tr>
@@ -255,7 +259,7 @@
                 </tr>
 
                 <tr>
-                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Предлагаемые параметры рабочей точки:</td>
+                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold;">Предлагаемые параметры рабочей точки:</td>
                 </tr>
                 <tr>
                     <!--<td rowspan="3">&nbsp;</td>-->
@@ -281,7 +285,7 @@
                 <tr>
 
                     <!--<td rowspan="7">&nbsp;</td>-->
-                    <td class="param-title" colspan="3" style="text-align: center; font-weight: bold; font-size: 20px;">Данные МПНУ:</td>
+                    <td class="param-title" colspan="3" style="font-weight: bold;">Данные МПНУ:</td>
                 </tr>
                 <tr>
                     <td>Входной коллектор</td>
@@ -335,7 +339,7 @@
     </tr>-->
             </tbody>
         </table>
-        <table class="main-table1" style="table-layout: fixed; width: 100%; border-collapse: collapse; margin-top: -1px; margin-right: 20px">
+        <table class="main-table1" style="table-layout: fixed; width: 100%; border-collapse: collapse;">
             <colgroup>
                 <col style="width: 20%;">
                 <col style="width: 20%;">
@@ -359,25 +363,27 @@
                     <td>{{F}}</td>
                 </tr>
                 <tr>
-                    <td class="razm" colspan="5" style="text-align: center; font-weight: bold; font-size: 17px;">Внимание! Представленные размеры могут незначительно отличаться от размеров итогового изделия!</td>
+                    <td class="razm" colspan="5" style="font-weight: bold;">Внимание! Представленные размеры могут незначительно отличаться от размеров итогового изделия!</td>
                 </tr>
 
             </tbody>
         </table>
     </div>
     <div style="page-break-after: always;"></div>           <!--разрыв страницы !!!!!!!!!!!!!-->
-
-     <div class="container Tabl-2-2" style="padding-right: 40px;">             
-        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">Гидравлическая схема</h1>
+    <h2>
+            Схема гидравлическая
+        </h2>
+     <div class="container Tabl-2-2">             
+        
         <img src="{{ img_gidr }}" alt="Изображение" style=" max-height: 600px; height: 590px; width: auto;">
-        <table class="table-gidr" style="width: 90% ; margin: 0 auto;">
+        <table class="table-gidr" style="width: 100% ;">
             <colgroup>
                 <col style="width: 20%;">
                 <col style="width: 80%;">
 
                 <!--<col style="width: 10%;">-->
             </colgroup>
-            <tr style="font-weight: bold; font-size: 20px;">
+            <tr style="font-weight: bold;">
                 <td>Обозначение</td>
                 <td>Наименование</td>
 
@@ -469,70 +475,70 @@
     </div>
 
     <div style="page-break-after: always;"></div>
-    <div class="container Tabl-2-3" style="padding-right: 40px;">
+    <div class="container Tabl-2-3">
         <!--3 страница!!!!!!!!!!!!!!!!!!!-->
         
-        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+        <h2>
             Приборы управления
-        </h1>
-        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+        </h2>
+        <h2>
             Шкаф управления насосами ШУН
-        </h1>
-        <p style="margin-left: 30px; text-align: justify;">
+        </h2>
+        <p style=" text-align: justify; font-size: 12px;">
             Предназначен для управления насосами и отображение информации о состоянии насосной станции и обеспечивает:
         </p>
-        <ul style="text-align: justify; margin-left: 30px; ">
+        <ul style="text-align: justify; font-size: 12px;">
             <li>индикацию и контроль наличия напряжения на основном и резервном вводах электропитания, при пропадании напряжения на рабочем вводе - ШУН автоматически переключает питание на резервный ввод;</li>
             <li>передачу информации о состоянии насосов шкафу управления и контроля ШУК по интерфейсной линии RS-485;</li>
             <li>контроль интерфейсной линии связи ШУК - ШУН;</li>
             <li>возможность автоматического и ручного управления насосами;</li>
         </ul>
-        <h1 style="text-align: center;  font-size: 20px;">
+        <h2>
             Схема подключения ШУН
-        </h1>
-        <img src="{{ img_shun }}" alt="Изображение" style=" display: block; margin: 0 auto; width: auto; height: 810px; max-height: 820px; ">
+        </h2>
+        <img src="{{ img_shun }}" alt="Изображение" style=" display: block; width: auto; height: 810px; max-height: 820px; text-align: center; ">
     </div>
 
     <div style="page-break-after: always;"></div>
-    <div class="container Tabl-2-4" style="padding-right: 40px;">
+    <div class="container Tabl-2-4">
         <!--3 страница!!!!!!!!!!!!!!!!!!!-->
         
-        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+        <h2>
             Шкаф управления и контроля ШУК
-        </h1>
-        <p style="margin-left: 30px; text-align: justify;">
+        </h2>
+        <p style="text-align: justify; font-size: 12px;">
             Предназначен для управления автоматикой модульной пожарной насосной установки. Алгоритм работы шкафа обеспечивается программируемым логическим контроллером. Более подробная информация о работе ШУК представлена в руководстве по эксплуатации ДАЭ 100.436.100 РЭ (в комплекте).
         </p>
-        <h1 style="text-align: center;  font-size: 20px;">
+        <h2>
             Схема подключения ШУК
-        </h1>
-        <img src="{{ img_shuk }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 675px; height: 456px; max-height: 456px;">
-        <img src="{{ img_shuk2 }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 663px; height: 320px; max-height:320px;">
-        <p style="margin-left: 30px; text-align: justify;">
+        </h2>
+        <img src="{{ img_shuk }}" alt="Изображение" style=" display: block;  width: 675px; height: 456px; max-height: 456px; text-align: center;">
+        <img src="{{ img_shuk2 }}" alt="Изображение" style=" display: block; width: 663px; height: 320px; max-height:320px; text-align: center;">
+        <p style="text-align: justify; font-size: 12px;">
             Подключение дополнительных устройств к блоку А1, доступно к входам 1-9.
         </p>
     </div>
 
     <div style="page-break-after: always;"></div>
-    <div class="container Tabl-2-5" style="padding-right: 40px;">
+    <div class="container Tabl-2-5">
         <!--3 страница!!!!!!!!!!!!!!!!!!!-->
         
-        <h1 style="text-align: center; font-weight: bold; font-size: 20px;">
+        <h2>
             Шкаф управления и сигнализации ШУС
-        </h1>
-        <p style="margin-left: 30px; text-align: justify;">
+        </h2>
+        <p style="text-align: justify; font-size: 12px;">
             ШУС осуществляет включение звуковой и световой сигнализации:
         </p>
-        <ul style="text-align: justify; margin-left: 30px; ">
+        <ul style="text-align: justify; font-size: 12px;">
             <li>о пуске насосов;</li>
             <li>о начале работы установки с указанием направлений, по которым подается огнетушащее вещество.</li>
             <li>об отключении автоматического пуска насосов и установки;</li>
             <li>о неисправности установки (исчезновение напряжения на рабочем и резервном вводах, давление воды на вводе ниже установленного, неисправности цепей электроуправления, об аварийном уровне в пожарном резервуаре, дренажном приямке, об отсутствии полного открытия задвижек (затворов) и т.д.</li>
         </ul>
-        <h1 style="text-align: center;  font-size: 20px;">
+        <h2>
             Схема подключения ШУС
-        </h1>
-        <img src="{{ img_shus }}" alt="Изображение" style=" display: block; margin: 0 auto; width: 677px; height: 532px; max-height: 532px; ">
+        </h2>
+        <img src="{{ img_shus }}" alt="Изображение" style=" display: block; width: 677px; height: 532px; max-height: 532px; text-align: center;">
     </div>
   
     <div style="page-break-after: always;"></div>

@@ -13,70 +13,7 @@
     src: url("../fonts/roboto/Roboto-Black.woff2") format('woff2');
 } */
 
-header, footer { /* верхний-нижинй футоры*/
-    background: #0F1379;
-    height: 96px;
-    max-width: 1704px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 12px;
-}
 
-footer {
-    margin-top: 20px;
-    margin-bottom: 0;
-    font-size: 14px;
-}
-
-.d-flex { /*подкласс в футерах*/
-    display: flex;
-    align-items: center;
-    /*justify-content: flex-start;*/
-    color: white;
-    height: 100%;
-    padding: 0 20px;
-}
-.d-flex1 { /*подкласс в футерах*/
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: white;
-    height: 100%;
-    padding: 0 10px;
-}
-
-.d-none, .d-none1 { /* найтройка расположенйи внутри шапки  */ /*надписи на нижней части веб страницы */
-    display: flex;
-    align-items: center;
-    /*justify-content: flex-end;*/
-    color: white;
-    height: 100%;
-    margin-left: auto;
-}
-
-.d-none {
-    padding: 0 30px;
-}
-
-.d-none1 {
-    padding: 0 20px;
-}
-
-.nav { /*область внутри шапки */
-    list-style-type: none; /* Убирает кружок */
-}
-
-.nav-link { /* номер телефона */
-    color: white;
-    text-decoration: none; /* Убирает подчеркивание */
-    font-size: 18px;
-}
-
-.nav-link2 { /* нижний футер */
-    color: white;
-    text-decoration: none; /* Убирает подчеркивание */
-    font-size: 14px;
-}
 
 body {
     font-family: Roboto;
@@ -136,7 +73,9 @@ a.grey-dark {
       
     }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-weight: 700;
     color: #0F1379;
     max-width: 1704px;
@@ -144,6 +83,7 @@ h1, h2, h3 {
 }
 
 h1 {
+    font-size: 28px;;
     margin: 20px auto;
 }
 
@@ -152,8 +92,9 @@ h2 {
 }
 
 h3 {
-    margin: 0px;
-    font-size: 22px;
+    font-size: 18px;
+    margin-top: 10px;
+
 }
 
 .container {
@@ -196,7 +137,7 @@ h3 {
 
 .container.Form-TY3 {
     padding: 20px;
-    padding-top: 5px;
+    padding-top: 20px;
     margin-bottom: 30px;
 }
 
