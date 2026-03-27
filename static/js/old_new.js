@@ -337,12 +337,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Функция для получения буквы по номеру (1->А, 2->Б, 3->В и т.д.)
   function getBranchLetter(num) {
-    // const letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'э', 'ю', 'я']
-    const letters = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-    'u', 'v', 'w', 'x', 'y', 'z'
-  ];
+    const letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'э', 'ю', 'я']
     return letters[num - 1] || num.toString()
   }
 
@@ -415,14 +410,11 @@ document.addEventListener("DOMContentLoaded", function() {
   // Функция для создания HTML контента новой ветви
   function createBranchHTML(list_sp=[1,2,3], branchNum, before_num) {
     const data = data_global[`data_global${branchNum}`] || [];
-    console.log(data_global)
-    branchNum = getBranchLetter(branchNum);
     const optionsHtml = data.map(el => {
-        return `<option value="${el.nom_size}">DN${el.nom_size}</option>`;
+        return `<option value="${el.k_t}">DN${el.nom_size}</option>`;
     }).join('');
 
     return `
-    <input type="hidden" id="${branchNum}-count" name="${branchNum}-count" value="${list_sp.length}">
       <table class="table branchTable" id="branchTable-${branchNum}">
         <thead>
           <th style="width: 150px" class="text-center">Наименование</th>
@@ -436,65 +428,64 @@ document.addEventListener("DOMContentLoaded", function() {
         </thead>
         <tbody>
           ${list_sp.map(i => `
-            <input type="hidden" id="${branchNum}_${i}_kt" name="${branchNum}_${i}_kt">
-            <input type="hidden" id="${branchNum}_${i}_kvelocity" name="${branchNum}_${i}_kvelocity">
+            <input type="hidden" id="${branchNum}-${i}-kt" name="${branchNum}-${i}-kt">
+            <input type="hidden" id="${branchNum}-${i}-kvelocity" name="${branchNum}-${i}-kvelocity">
             <tr data-num="${i}" data-type="sprinkler" class="sprinkler-row">
-              <td nowrap>Ороситель ${i}${branchNum}</td>
-              <td class="text-center"></td>
-              <td class="text-center"></td>
-              <td><input type="number" class="form-control section-length" id="${branchNum}_${i}_height" name="${branchNum}_${i}_height" required min="0" step="0.1"></td>
-              <td class="text-center"></td>
-              <td class="text-center"></td>
-              <td id="${branchNum}_${i}_flow_sprinkler" class="text-center"></td>
-              <td id="${branchNum}_${i}_pressure"class="text-center"></td>
+              <td nowrap>Ороситель ${i}${getBranchLetter(branchNum).toLowerCase()}</td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td><input type="number" class="form-control section-length"  name="${branchNum}-${i}-height" required min="0" step="0.1"></td>
+              <td class="text-center">-</td>
+              <td class="text-center">-</td>
+              <td class="Q_sprinkler_value text-center"></td>
+              <td class="P_sprinkler_value text-center"></td>
             </tr>
             <tr data-num="${i}" data-type="section" class="section-row">
-              <td nowrap>Участок ${i}${branchNum}-${i+1}${branchNum}</td>
+              <td nowrap>Участок ${i}${getBranchLetter(branchNum).toLowerCase()}-${i+1}${getBranchLetter(branchNum).toLowerCase()}</td>
               <td>
-                <select class="form-control section-length" required  name="${branchNum}_${i}_DN" id="${branchNum}_${i}_DN">
-                  <option value="">Выберите DN</option>
+                <select class="form-control section-length" required  name="${branchNum}-${i}-DN" id="${branchNum}-${i}-DN">
+                  <option value="">-- выберите длину --</option>
                   ${optionsHtml}
                 </select>
               </td>
-              <td><input type="number" class="form-control section-length" id="${branchNum}_${i}_length" name="${branchNum}_${i}_length" required min="0" step="0.1"></td>
-              <td class="text-center"></td>
-              <td id="${branchNum}_${i}_velocity" class="text-center"></td>
-              <td id="${branchNum}_${i}_pressure_loss" class="text-center"></td>
-              <td id="${branchNum}_${i}_flow_region" class="text-center"></td>
-              <td class="text-center"></td>
+              <td><input type="number" class="form-control section-length" name="${branchNum}-${i}-length" required min="0" step="0.1"></td>
+              <td class="text-center">-</td>
+              <td class="P_loss_value text-center"></td>
+              <td class="Q_section_value text-center"></td>
+              <td class="P_section_value text-center">-</td>
+              <td class="Q_total_value text-center" style="display: none;"></td>
+              <td></td>
             </tr>
           `).join('')}
 
           ${before_num>0
-                  ? `<tr data-type="node" class="node-row" id="node-row-${getBranchLetter(before_num)}-${branchNum}">
-                      <input type="hidden" id="${branchNum}_kt" name="${branchNum}__kt">
-                      <input type="hidden" id="${branchNum}_kvelocity" name="${branchNum}_kvelocity">
-                      <td nowrap>Участок <span class="node-label">${getBranchLetter(before_num)}-${branchNum}</span></td>
-                      <td>
-                        <select class="form-control section-length" required  name="${branchNum}_DN" id="${branchNum}_DN">
-                          <option value="">Выберите DN</option>
+                  ? `<tr data-type="node" class="node-row" id="node-row-${before_num}-${branchNum}">
+                      <td nowrap>Участок <span class="node-label">${getBranchLetter(before_num)}-${getBranchLetter(branchNum)}</span></td>
+                       <td>
+                        <select class="form-control section-length"  required>
+                          <option value="">-- выберите длину --</option>
                           ${optionsHtml}
                         </select>
                       </td>
-                      <td><input type="number" class="form-control section-length" id="${branchNum}_length" name="${branchNum}_length" required min="0" step="0.1"></td>
-                      <td class="text-center"></td>
-                      <td id="${branchNum}_velocity" class="text-center"></td>
-                      <td id="${branchNum}_pressure_loss" class="text-center"></td>
-                      <td id="${branchNum}_flow_region" class="text-center"></td>
-                      <td class="text-center"></td>
+                      <td><input type="number" class="form-control section-length"  name="${branchNum}-height" required min="0" step="0.1"></td>
+                      <td class="node-P-loss text-center">-</td>
+                      <td class="node-P-loss text-center">-</td>
+                      <td class="node-Q text-center">-</td>
+                      <td class="node-P text-center">-</td>
+                      <td class="node-P text-center">-</td>
                     </tr>`
                   : ''
           }
           <tr data-type="node" class="node-row" id="node-row-${branchNum}">
             
-            <td nowrap>Узел <span class="node-label">${branchNum}</span></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td><input type="number" class="form-control section-length" id="${branchNum}_height" name="${branchNum}_height" required min="0" step="0.1"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td id="${branchNum}_flow_sprinkler" class="text-center"></td>
-            <td id="${branchNum}_pressure"class="text-center"></td>
+            <td nowrap>Узел <span class="node-label">${getBranchLetter(branchNum)}</span></td>
+            <td class="node-length text-center">-</td>
+            <td class="node-length text-center">-</td>
+            <td><input type="number" class="form-control section-length"  name="${branchNum}-height" required min="0" step="0.1"></td>
+            <td class="node-Q text-center">-</td>
+            <td class="node-P text-center">-</td>
+            <td class="node-Q text-center">-</td>
+            <td class="node-P text-center">-</td>
           </tr>
 
         </tbody>
@@ -1460,28 +1451,15 @@ form_main.addEventListener('submit', function (e) {
         return response.json()
     })
           .then(data => {
-            const dict = data['data']
+    console.log('Ответ сервера:', data);
 
-        Object.entries(dict).forEach(([key, value]) => {
-            console.log('key:', key);
-            console.log('value:', value);
+    // если data — это обычный объект
+          Object.entries(data).forEach(([key, value]) => {
+              const e = document.getElementById(key);
+              if (!e) return;       // эквивалент continue
+              e.value = value;
+          });
 
-            const e = document.getElementById(key);
-            console.log('element:', e);
-
-            if (!e) return;
-
-            // Проверяем, если это input / select / textarea — меняем value
-            if (e.tagName === 'INPUT' || e.tagName === 'SELECT' || e.tagName === 'TEXTAREA') {
-                e.value = value;
-            }
-            // Иначе — меняем innerHTML (например, <td>, <div>, <span>)
-            else {
-                e.innerHTML = value;
-            }
-
-            console.log('updated element:', e);
-        });
     })
     .catch(error => {
         console.error('Ошибка:', error);
@@ -1521,41 +1499,9 @@ async function create_inner(i) {
     const before = 0;
     const branchPane = document.getElementById(`inner${i}`);
     const n = document.getElementById(`count_sprink${i}`).value;
-    const list_sp = [];  
-            //     <input type="hidden" id="${branchNum}_${i}_kt" name="${branchNum}_${i}_kt">
-            // <input type="hidden" id="${branchNum}_${i}_kvelocity" name="${branchNum}_${i}_kvelocity"></input>
-    // const list_sp = Array.from({ length: n }, (_, i_val) => i_val + 1);
-    for (let i = 0; i < n; i++) {                       // от 0 до n-1
-    list_sp.push(i + 1);                            // вставляем 1, 2, 3, ...
-    }
+    const list_sp = Array.from({ length: n }, (_, i_val) => i_val + 1);
     console.log(`before=${before}`);
     branchPane.innerHTML = createBranchHTML(list_sp, i,i-1);
-    for(let j=1; j<=n; j++)
-    {
-      const branch = getBranchLetter(i)
-      console.log("attetions!")
-      const DN= document.getElementById(`${branch}_${j}_DN`);
-      const kt= document.getElementById(`${branch}_${j}_kt`);
-      const kvelocity = document.getElementById(`${branch}_${j}_kvelocity`);
-      const data = data_global[`data_global${i}`];
-      console.log("data:", data)
-      console.log("attetions!", DN, kt, kvelocity);
-      
-      DN.addEventListener('change', function () {
-          const selected_noms = parseFloat(this.value);  // selected DN (like 15, 20...)
-
-          const tube = data.find(el => el.nom_size === selected_noms);
-          console.log("1548",tube, selected_noms)
-          if (tube) {
-              kt.value        = tube.k_t || '';
-              kvelocity.value      = tube.kvelocity|| '';
-          } else {
-              kt.value        = '';
-              kvelocity.value      = '';
-          }
-      });
-    }
-    
 }
 
 

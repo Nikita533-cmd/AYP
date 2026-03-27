@@ -3,9 +3,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import solve
+from .views import sole_api
 
 urlpatterns = [
-    path('sole/', solve, name='solve'),
+    path('sole/', sole_api, name='solve'),
 ]
 

@@ -24,7 +24,8 @@ urlpatterns = [
     path("ipa/", include("python.urls")),
     # path("ipa/", views.ipa, name='ipa'),
     path("irrigation/", views.index, name='index'),
-    path("mpnu/", include("app.urls")),
+    path("ayp_api/", include("api.urls")),
+    # path("mpnu/", include("app.urls")),
 
 ]
 

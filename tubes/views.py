@@ -18,5 +18,8 @@ def tube_types_list(request):
 
 @router.get("list/", response=List[TubeSchema])
 def tubes_list(request, type_id: int):
+    
     data = Type.objects.filter(tube_type=type_id)
+    print(data)
+    print(type_id)
     return data
